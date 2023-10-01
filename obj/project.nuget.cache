@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EwyVngjILLr5QaVHv1OkJx1XUI5SzokCRnbuCffPHm9S/gXhK3+0eO8SL6Nt7ZCHPsBLck8i7d8Vs1MB3gT2sA==",
+  "dgSpecHash": "/od/gbHknsfIoIMq0YrrxeAkO3MMvL1ELR3nVqN/hwBwu5nVupACya1hUHrVyqED+Lo5P09k/K0lhxHY+fwM5A==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bhaah\\OneDrive\\שולחן העבודה\\myFirstAppSol\\myFirstAppSol.csproj",
+  "projectFilePath": "C:\\Users\\bhaah\\Source\\Repos\\bhaah\\myAppV3\\myFirstAppSol.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bhaah\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
     "C:\\Users\\bhaah\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",

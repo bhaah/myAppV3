@@ -229,11 +229,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bhaah\\OneDrive\\שולחן העבודה\\myFirstAppSol\\myFirstAppSol.csproj",
+      "projectUniqueName": "C:\\Users\\bhaah\\Source\\Repos\\bhaah\\myAppV3\\myFirstAppSol.csproj",
       "projectName": "myFirstAppSol",
-      "projectPath": "C:\\Users\\bhaah\\OneDrive\\שולחן העבודה\\myFirstAppSol\\myFirstAppSol.csproj",
+      "projectPath": "C:\\Users\\bhaah\\Source\\Repos\\bhaah\\myAppV3\\myFirstAppSol.csproj",
       "packagesPath": "C:\\Users\\bhaah\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bhaah\\OneDrive\\שולחן העבודה\\myFirstAppSol\\obj\\",
+      "outputPath": "C:\\Users\\bhaah\\Source\\Repos\\bhaah\\myAppV3\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bhaah\\AppData\\Roaming\\NuGet\\NuGet.Config",
