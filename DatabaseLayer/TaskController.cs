@@ -138,12 +138,30 @@ namespace WebApplication2.DatabaseLayer
 
         //update querys
 
-        //public void updateName(string name,int id)
-        //{
-        //    using(SQLiteConnection connection = new SQLiteConnection())
-        //}
+        public void updateName(string name, int id)
+        {
+            DBF.Update(TableName, ColName,name,ColId, id);
+        }
 
+        public void updateDesc(int id,string desc)
+        {
+            DBF.Update(TableName,ColDesc,desc,ColId, id);
+        }
 
+        public void updateStatus(int id, int status)
+        {
+            DBF.Update(TableName,ColStatus,status,ColId, id);
+        }
+        public void updateDeadline(int id,DateTime deadLine)
+        {
+            string deadline = deadLine.ToString(timeFormat);
+            DBF.Update(TableName,ColDeadline,deadline,ColId, id);
+        }
+        public void updateTimeToStart(int id, DateTime timeToStartPar)
+        {
+            string toStart = timeToStartPar.ToString(timeFormat);
+            DBF.Update(TableName, ColDeadline, toStart, ColId, id);
+        }
 
         //delet query
 

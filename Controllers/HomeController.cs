@@ -282,13 +282,13 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateName")] 
-        public IActionResult PostEditTaskName([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskIad, [FromForm] int status, [FromForm] string newName)
+        public IActionResult PostEditTaskName([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] string newName)
         {
             Response res;
             try
             {
                 BoardLogic bl =checkUser(email, password);
-                bl.editTaskName(corId,taskIad,status,newName);
+                bl.editTaskName(corId,taskId,status,newName);
                 res = new Response();
             }
             catch(Exception ex)
@@ -300,13 +300,13 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateDesc")]
-        public IActionResult PostEditTaskDesc([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskIad, [FromForm] int status, [FromForm] string desc)
+        public IActionResult PostEditTaskDesc([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] string desc)
         {
             Response res;
             try
             {
                 BoardLogic bl = checkUser(email, password);
-                bl.editTaskDesc(corId, taskIad, status, desc);
+                bl.editTaskDesc(corId, taskId, status, desc);
                 res = new Response();
             }
             catch (Exception ex)
@@ -318,13 +318,13 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateDeadline")]
-        public IActionResult PostEditTaskDeadline([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskIad, [FromForm] int status, [FromForm] DateTime time)
+        public IActionResult PostEditTaskDeadline([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] DateTime time)
         {
             Response res;
             try
             {
                 BoardLogic bl = checkUser(email, password);
-                bl.editTaskDeadline(corId, taskIad, status, time);
+                bl.editTaskDeadline(corId, taskId, status, time);
                 res = new Response();
             }
             catch (Exception ex)
@@ -336,13 +336,13 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateStartTime")]
-        public IActionResult PostEditTaskStartTime([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskIad,[FromForm] DateTime time ,[FromForm] int status )
+        public IActionResult PostEditTaskStartTime([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId,[FromForm] DateTime time ,[FromForm] int status )
         {
             Response res;
             try
             {
                 BoardLogic bl = checkUser(email, password);
-                bl.editTaskStartTime(corId, taskIad, status, time);
+                bl.editTaskStartTime(corId, taskId, status, time);
                 res = new Response();
             }
             catch (Exception ex)

@@ -28,37 +28,49 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set 
+            {
+                tdto.Name = value;
+                _name = value; }
         }
         public string Description
         {
             get { return _description; }
-            set { _description = value; }
+            set {
+                tdto.Description = value;
+                _description = value; }
         }
         public DateTime TaskFor
         {
             get { return _taskDeadLine; }
-            set { _taskDeadLine = value; }
+            set {
+                tdto.Deadline = value;
+                _taskDeadLine = value; }
         }
 
         public DateTime TaskStart
         {
             get { return _taskStart; }
-            set { _taskStart = value; }
+            set {
+                tdto.ToStart = value;
+                _taskStart = value; }
         }
 
         public int Status
         {
             get { return _status; }
-            set { _status = value; }
+            set {
+                Console.WriteLine("this debug is from -set status in task");
+                tdto.Status = value;
+                _status = value; }
         }
 
         //const
 
         public Task(string name, string description, int id, DateTime deadLine,int corId)
         {
-            Name = name;
-            Description = description;
+            _name = name;
+            _description = description;
             Id = id;
             _taskDeadLine = deadLine;
             this.corId= corId;
@@ -81,7 +93,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
 
         public void MoveTask()
         {
-            if (_status < 3) _status++;
+            if (_status < 3) Status++;
         }
     }
 }

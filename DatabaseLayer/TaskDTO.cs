@@ -23,18 +23,35 @@
         public string Name
         {
             get { return _name; }
-            set { _name = value; }
+            set { 
+                if(isPersisted)
+                {
+                    tc.updateName(value, Id);
+                }
+                
+                _name = value; }
         }
         public string Description
         {
             get { return _description; }
-            set { _description = value; }
+            set 
+            {
+                if (isPersisted)
+                {
+                    tc.updateDesc(Id, value);
+                }
+                
+                _description = value; }
         }
         public DateTime Deadline
         {
             get { return _deadline; }
             set
             {
+                if (isPersisted)
+                {
+                    tc.updateDeadline(Id, value);
+                }
                 _deadline = value;
             }
         }
@@ -43,6 +60,10 @@
             get { return _toStart; }
             set
             {
+                if (isPersisted)
+                {
+                    tc.updateTimeToStart(Id, value);
+                }
                 _toStart = value;
             }
         }
@@ -51,6 +72,12 @@
             get { return _status; }
             set
             {
+                Console.WriteLine("this debug is from -set status in taskDTO");
+                if (isPersisted)
+                {
+                    Console.WriteLine("dto is persisted and now we are about to update it in the db");
+                    tc.updateStatus(Id, value);
+                }
                 _status = value;
             }
         }
@@ -74,6 +101,10 @@
             if (toPersist)
             {
                 persist();
+            }
+            else
+            {
+                isPersisted= true;
             }
         }
 

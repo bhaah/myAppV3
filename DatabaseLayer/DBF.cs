@@ -80,5 +80,27 @@ namespace WebApplication2.DatabaseLayer
                 }
             }
         }
+
+
+        internal static void Update(string TableName,string colNameToChange,object valueToChange,string colPK,object valuePK)
+        {
+            using (SQLiteConnection connection = new SQLiteConnection(con))
+            {
+                SQLiteCommand command = new SQLiteCommand(connection);
+                try
+                {
+                    command.CommandText = $"UPDATE {TableName} SET {colNameToChange} = @ValueToChange WHERE {colPK}= @pkValue";
+                    convertVP(command, @"ValueToChange", valueToChange);
+                    convertVP(command, @"pkValue", valuePK);
+                    prepare(command, connection);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    printEx(command, ex);
+                }
+                finally { end(command, connection); }
+            }
+        }
     }
 }
