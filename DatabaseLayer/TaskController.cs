@@ -138,10 +138,10 @@ namespace WebApplication2.DatabaseLayer
 
         //update querys
 
-        public void updateName(string name,int id)
-        {
-            using(SQLiteConnection connection = new SQLiteConnection())
-        }
+        //public void updateName(string name,int id)
+        //{
+        //    using(SQLiteConnection connection = new SQLiteConnection())
+        //}
 
 
 
