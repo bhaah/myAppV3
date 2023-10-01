@@ -1,0 +1,7 @@
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.csproj.AssemblyReference.cache
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.AssemblyInfoInputs.cache
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.AssemblyInfo.cs
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.csproj.CoreCompileInputs.cache
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.MvcApplicationPartsAssemblyInfo.cache
