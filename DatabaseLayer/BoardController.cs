@@ -120,5 +120,10 @@ namespace WebApplication2.DatabaseLayer
             return toRet;
         }
 
+
+        public void updateName(int id,string name)
+        {
+            DBF.Update(tableName, ColName,name,ColId,id);
+        }
     }
 }

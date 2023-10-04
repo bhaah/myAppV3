@@ -21,7 +21,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             int cornerId = cc.getMaxID() + 1;
             _corners.Add(cornerId, new CornerOfTasks(id,cornerId, "Tasks", "without corners"));
             bdto = new BoardDTO(id, name,email,true);
-            bdto.persist();
+            
         }
 
         public Board(BoardDTO dto)
@@ -48,6 +48,14 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public string Name
         {
             get { return _name; }
+            set
+            {
+                if (_name != value)
+                {
+                    _name = value;
+                    bdto.Name = value;
+                }
+            }
         }
 
         //corners:

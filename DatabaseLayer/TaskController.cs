@@ -136,7 +136,7 @@ namespace WebApplication2.DatabaseLayer
 
 
 
-        //update querys
+        //update querys -------------
 
         public void updateName(string name, int id)
         {

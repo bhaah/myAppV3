@@ -116,5 +116,23 @@ namespace WebApplication2.DatabaseLayer
             return toRet;
         }
 
+
+        // update funs ------------------------
+
+        public void updateName(int id, string name)
+        {
+            DBF.Update(TableName, ColName,name,ColId , id);
+        }
+
+        public void updateProgress(int id ,int progress)
+        {
+            DBF.Update(TableName, ColProgress, progress, ColId, id);
+        }
+
+        public void updateDescription(int id,string description)
+        {
+            DBF.Update(TableName,ColDesc,description,ColId, id);
+        }
+
     }
 }

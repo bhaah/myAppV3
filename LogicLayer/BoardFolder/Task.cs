@@ -19,7 +19,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private int corId;
         private TaskDTO tdto;
 
-        //geters and seters
+        //geters and seters -----------------
+
+
         public int Id
         {
             get { return _id; }
@@ -65,7 +67,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
                 _status = value; }
         }
 
-        //const
+        //const --------------------
 
         public Task(string name, string description, int id, DateTime deadLine,int corId)
         {
@@ -90,7 +92,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
 
 
-
+        // other methods ---------------
         public void MoveTask()
         {
             if (_status < 3) Status++;

@@ -22,6 +22,10 @@
             get { return _name; }
             set
             {
+                if(isPersisted)
+                {
+                    bc.updateName(Id, value);
+                }
                 _name = value;
             }
         }
@@ -37,6 +41,14 @@
             _id = id;
             _name = name;
             _email = email;
+            if(toPersist)
+            {
+                persist();
+            }
+            else
+            {
+                isPersisted = true;
+            }
         }
 
 
