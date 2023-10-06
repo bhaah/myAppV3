@@ -13,7 +13,7 @@
         {
             get { return _note; }
             set {
-                if(isPersisted) { nc.updateNote(Id,value)}
+                if(isPersisted) { nc.updateNote(Id, value); }
                 _note = value; 
             }
 
@@ -29,15 +29,20 @@
 
 
 
-        public NoteDTO(string note, int id,bool toPersisit)
+        public NoteDTO(string note, int id,int boardId,bool toPersisit)
         {
             _note = note;
             _id = id;
+            _boardId = boardId;
             if (toPersisit) persist();
             else isPersisted= true;
          
         }
 
-        public void persist() { }
+        public void persist() 
+        {
+            nc.Insert(this);
+            isPersisted= true;
+        }
     }
 }

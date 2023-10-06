@@ -25,7 +25,7 @@ namespace WebApplication2.DatabaseLayer
 
 
 
-        //insert and geterss
+        //insert and geterss------------------------------
 
 
         public void InsertCorner(CornerDTO cor)
@@ -135,7 +135,7 @@ namespace WebApplication2.DatabaseLayer
         }
         
 
-        //delete data
+        //delete data-----------------------------
         public void deleteCorner(int id)
         {
             DBF.delete(TableName, ColId, id);

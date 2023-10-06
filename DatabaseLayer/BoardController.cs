@@ -14,14 +14,14 @@ namespace WebApplication2.DatabaseLayer
         private string path;
         private string connectionString;
 
-
+        //consructor -----------------
         public BoardController()
         {
             path = DBF.path;
             connectionString = DBF.con;
         }
 
-
+        // geters and insert ---------------------
         public void addBoard(BoardDTO board)
         {
             int id = board.Id;
@@ -119,7 +119,7 @@ namespace WebApplication2.DatabaseLayer
             }
             return toRet;
         }
-
+        //update method : ------------------------------
 
         public void updateName(int id,string name)
         {

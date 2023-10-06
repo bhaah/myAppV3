@@ -125,7 +125,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
         public void addNote(int id,string content) 
         {
-            _notes.Add(id,new Note(id,content));            
+            _notes.Add(id,new Note(id,content,_id));            
         }
         public void removeNote(int id) 
         {
