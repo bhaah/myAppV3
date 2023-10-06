@@ -133,6 +133,13 @@ namespace WebApplication2.DatabaseLayer
         {
             DBF.Update(TableName,ColDesc,description,ColId, id);
         }
+        
+
+        //delete data
+        public void deleteCorner(int id)
+        {
+            DBF.delete(TableName, ColId, id);
+        }
 
     }
 }

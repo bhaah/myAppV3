@@ -102,5 +102,25 @@ namespace WebApplication2.DatabaseLayer
                 finally { end(command, connection); }
             }
         }
+
+        internal static void delete(string TableName,string colId,int id)
+        {
+            using(SQLiteConnection connection = new SQLiteConnection(con))
+            {
+                SQLiteCommand command = new SQLiteCommand(connection);
+                try
+                {
+                    command.CommandText = $"DELETE FROM {TableName} WHERE {colId}={id}";
+                    prepare(command, connection);
+                    command.ExecuteNonQuery();
+                }
+                catch(Exception ex)
+                {
+                    printEx(command, ex);
+                }
+                finally { end(command, connection); }
+            }
+        }
+        
     }
 }

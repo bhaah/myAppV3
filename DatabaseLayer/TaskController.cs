@@ -165,7 +165,10 @@ namespace WebApplication2.DatabaseLayer
 
         //delet query
 
-
+        public void deleteTask(int id)
+        {
+            DBF.delete(TableName, ColId,id);
+        }
 
     }
 }

@@ -125,5 +125,12 @@ namespace WebApplication2.DatabaseLayer
         {
             DBF.Update(tableName, ColName,name,ColId,id);
         }
+
+
+        //delete from database -----------------
+        public void deleteBoad(int id)
+        {
+            DBF.delete(tableName,ColId,id);
+        }
     }
 }

@@ -6,7 +6,6 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private int _corId;
         private string _name;
         private string _description;
-        //private List<Task> _tasks;
         private tasksPage[] _pages;
         private int _progress;
         private CornerDTO _corDTO;

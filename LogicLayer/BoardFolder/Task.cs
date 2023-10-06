@@ -19,6 +19,8 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private int corId;
         private TaskDTO tdto;
 
+
+
         //geters and seters -----------------
 
 
@@ -47,7 +49,8 @@ namespace WebApplication2.LogicLayer.BoardFolder
             get { return _taskDeadLine; }
             set {
                 tdto.Deadline = value;
-                _taskDeadLine = value; }
+                _taskDeadLine = value;
+            }
         }
 
         public DateTime TaskStart
