@@ -1,4 +1,6 @@
-﻿namespace WebApplication2.DatabaseLayer
+﻿using System.Data.SQLite;
+
+namespace WebApplication2.DatabaseLayer
 {
     public class NoteController
     {
@@ -24,8 +26,28 @@
 
         public void Insert(NoteDTO noteDTO)
         {
-            int id = 
-
+            int id = noteDTO.Id ;
+            string note = noteDTO.Note ;
+            int boardId= noteDTO.BoardId ;
+            using(SQLiteConnection connection = new SQLiteConnection(con))
+            {
+                SQLiteCommand command = new SQLiteCommand(connection);
+                try
+                {
+                    command.CommandText = $"INSERT INTO {TableName} ({ColId},{ColName},{ColBoardId}) VALUES ({id}, @noteVal, {boardId}) ";
+                    DBF.convertVP(command, @"noteVal", note);
+                    DBF.prepare(command, connection);
+                    command.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    DBF.printEx(command, ex);
+                }
+                finally
+                {
+                    DBF.end(command,connection);
+                }
+            }
 
 
         }
