@@ -75,5 +75,10 @@
             cc.InsertCorner(this);
             isPersisted= true;
         }
+        public void delete()
+        {
+            cc.deleteCorner(_id);
+            isPersisted= false;
+        }
     }
 }

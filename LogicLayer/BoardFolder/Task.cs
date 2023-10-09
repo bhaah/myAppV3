@@ -100,5 +100,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             if (_status < 3) Status++;
         }
+
+        public void delete()
+        {
+            tdto.delete();
+        }
     }
 }

@@ -11,7 +11,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public string Content
         {
             get { return _note; }
-            set { _note = value; }
+            set { 
+                ndto.Note = value;
+                _note = value;
+            }
         }
         public int Id
         {

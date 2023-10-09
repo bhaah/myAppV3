@@ -149,7 +149,15 @@ namespace WebApplication2.LogicLayer.BoardFolder
             return tasks;
         }
 
-
+        //ANOTHER
+        public void deleteFromDB()
+        {
+            foreach(tasksPage tp in _pages)
+            {
+                tp.deleteAllTasks();
+            }
+            _corDTO.delete()
+        }
 
     }
 }

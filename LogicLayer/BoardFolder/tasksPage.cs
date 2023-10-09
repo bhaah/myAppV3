@@ -82,5 +82,13 @@ namespace WebApplication2.LogicLayer.BoardFolder
             if (!_tasks.ContainsKey(id)) { throw new ArgumentException("in this page there is no task id :" + id); }
             _tasks[id].TaskStart=dateTime;
         }
+
+        public void deleteAllTasks()
+        {
+            foreach(Task t in _tasks.Values)
+            {
+                t.delete()
+            }
+        }
     }
 }

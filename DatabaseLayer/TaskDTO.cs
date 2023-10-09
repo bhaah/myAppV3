@@ -115,5 +115,11 @@
             isPersisted= true;
             
         }
+
+        public void delete()
+        {
+            tc.deleteTask(Id);
+            isPersisted= false;
+        }
     }
 }

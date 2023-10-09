@@ -15,26 +15,12 @@
         public string Email
         {
             get { return _email; }
-            set
-            {
-                if(_isPersisted)
-                {
-                    _email = value;
-                   // uc.updateEmail(value);
-                }
-            }
+            
         }
         public string Password
         {
             get { return _password; }
-            set
-            {
-                if (_isPersisted)
-                {
-                    _password = value;
-                    //
-                }
-            }
+          
         }
         public string UserName
         {

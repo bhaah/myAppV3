@@ -11,7 +11,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private BoardDTO bdto;
         private CornerController cc = new CornerController();
         
-        //cons
+        //cons ------------------------------
         public Board(int id, string name,string email)
         {
             _id = id;
@@ -39,7 +39,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             bdto = dto;
         }
 
-        //geters
+        //geters ------------------------------
 
         public int ID
         {
@@ -58,7 +58,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             }
         }
 
-        //corners:
+        //corners:---------------------------------
         public Dictionary<int,CornerOfTasks> getAllCorners()
         {
             return _corners;
@@ -74,6 +74,8 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
         public void removeCorner(int id)
         {
+            if (!_corners.ContainsKey(id)) { throw new ArgumentException("there is no corner with this id "); }
+            _corners[id].deleteFromDB();       
             _corners.Remove(id);
         }
         public int getCornerProgress(int id)
@@ -87,7 +89,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             if (!_corners.ContainsKey(id)) { throw new ArgumentException("there is no corner with this id"); }
             return _corners[id].getTasks();
         }
-        //tasks:
+        //tasks: ----------------------------------
 
         public void creatTask(int CorID, int taskId, string name, string desc, DateTime dateTime)
         {
@@ -117,7 +119,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
 
 
 
-        //notes
+        //notes ---------------------------------------
 
         public Dictionary<int,Note> getAllNotes() 
         {
@@ -131,7 +133,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             _notes.Remove(id);
         }
-
+        public void updateNote(string note,int id)
+        {
+            _notes[id].Content = note;
+        }
 
 
     }
