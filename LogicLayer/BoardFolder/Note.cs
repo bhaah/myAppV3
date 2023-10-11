@@ -40,5 +40,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
             _boardId = ndto.BoardId;
             this.ndto = new NoteDTO(ndto.Note, ndto.Id, ndto.BoardId, false);
         }
+
+        public void deleteNote()
+        {
+            ndto.delete();
+        }
     }
 }

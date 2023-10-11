@@ -116,7 +116,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             _corners[corId].setTimeTodo(taskId, status, dateTime);
         }
-
+        public void deleteTask(int corID, int taskId) 
+        {
+            _corners[corID].deleteTask(taskId);
+        }
 
 
         //notes ---------------------------------------
@@ -132,6 +135,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public void removeNote(int id) 
         {
             _notes.Remove(id);
+            _notes[id].deleteNote();
         }
         public void updateNote(string note,int id)
         {
@@ -139,5 +143,20 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
 
 
+
+        //OTHER ----------------
+        public void deleteBoard()
+        {
+            foreach(CornerOfTasks cor in _corners.Values)
+            {
+                removeCorner(cor.ID);
+            }
+            foreach(Note note in _notes.Values)
+            {
+                removeNote(note.Id);
+            }
+            
+            bdto.delete();
+        }
     }
 }

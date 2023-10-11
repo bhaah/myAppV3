@@ -148,6 +148,13 @@ namespace WebApplication2.LogicLayer.BoardFolder
             }
             return tasks;
         }
+        public void deleteTask(int id)
+        {
+            foreach(tasksPage tp in _pages)
+            {
+                tp.removeTask(id);
+            }
+        }
 
         //ANOTHER
         public void deleteFromDB()
@@ -156,7 +163,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             {
                 tp.deleteAllTasks();
             }
-            _corDTO.delete()
+            _corDTO.delete();
         }
 
     }

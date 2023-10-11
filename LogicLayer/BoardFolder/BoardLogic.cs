@@ -49,6 +49,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
         public void deleteBoard(int id) 
         {
+            _board[id].deleteBoard();
             _board.Remove(id);
         }
 
@@ -95,10 +96,13 @@ namespace WebApplication2.LogicLayer.BoardFolder
             checkBoard();
             currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
         }
-        public void deleteTask() 
+        public void deleteTask(int boardId,int corId,int taskId) 
         {
             checkBoard();
-            
+            if(currBoard.ID==boardId)
+            {
+                currBoard.deleteTask(corId,taskId);
+            }
         }
         public void moveTask(int corID,int taskId) 
         {
@@ -146,7 +150,17 @@ namespace WebApplication2.LogicLayer.BoardFolder
             checkBoard();
             currBoard.addNote(id, content);
         }
-        public void removeNote() { }
+        public void removeNote(int id) 
+        {
+            checkBoard();
+            currBoard.removeNote(id);
+        }
+
+        public void editNote(int id,string note)
+        {
+            checkBoard();
+            currBoard.updateNote(note, id);
+        }
 
 
         //celendar

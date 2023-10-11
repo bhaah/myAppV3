@@ -57,5 +57,11 @@
             bc.addBoard(this);
             isPersisted= true;
         }
+
+        public void delete()
+        {
+            bc.deleteBoad(Id);
+            isPersisted= false;
+        }
     }
 }

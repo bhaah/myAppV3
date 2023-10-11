@@ -87,7 +87,15 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             foreach(Task t in _tasks.Values)
             {
-                t.delete()
+                t.delete();
+            }
+        }
+
+        public void removeTask(int id)
+        {
+            if (_tasks.ContainsKey(id))
+            {
+                _tasks[id].delete();
             }
         }
     }

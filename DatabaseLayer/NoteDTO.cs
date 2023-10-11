@@ -44,5 +44,11 @@
             nc.Insert(this);
             isPersisted= true;
         }
+
+        public void delete()
+        {
+            nc.deleteNote(Id);
+            isPersisted= false;
+        }
     }
 }

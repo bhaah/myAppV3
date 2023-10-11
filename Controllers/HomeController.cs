@@ -140,6 +140,22 @@ namespace WebApplication2.Controllers
             Console.WriteLine(JsonSerializer.Serialize(res));
         }
 
+        [HttpPost("deleteBoard")]
+        public IActionResult deleteBoardPost([FromForm] string email, [FromForm] string passowd, [FromForm] int boardId)
+        {
+            Response res;
+            try{
+                BoardLogic bl = checkUser(email, passowd);
+                bl.deleteBoard(boardId);
+                res= new Response();
+            }
+            catch(Exception ex) 
+            {
+                res = new Response(ex.Message, null); 
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
         //------------- CORNERS
 
         [HttpGet("getCorners")]
@@ -353,6 +369,23 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
         }
 
+        [HttpPost("deleteTask")]
+        public IActionResult deleteTaskPost([FromForm] string email, [FromForm] string password, [FromForm] int boardId, [FromForm] int corId, [FromForm] int taskId)
+        {
+            Response res;
+            try
+            {
+                BoardLogic bl = checkUser(email, password);
+                bl.deleteTask(boardId, corId, taskId);
+                res = new Response();
+            }
+            catch (Exception ex)
+            {
+                res = new Response(ex.Message);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
         //---------NOTES MANGMENT-----------
 
         [HttpPost("getNotesOfBoard")]
@@ -390,7 +423,34 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
         }
 
-
+        [HttpPost("deleteNote")]
+        public IActionResult deleteNotePost([FromForm] string email, [FromForm] string password, [FromForm] int noteId)
+        {
+            Response res;
+            try{
+                BoardLogic bl = checkUser(email,password);
+                bl.removeNote(noteId);
+                res = new Response();
+            }
+            catch(Exception ex) { res = new Response(ex.Message, null); }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+        [HttpPost("editNote")]
+        public IActionResult editNotPost([FromForm] string email, [FromForm] string password, [FromForm] int noteId, [FromForm] string noteToChange)
+        {
+            Response res;
+            try
+            {
+                BoardLogic bl = checkUser(email,password);
+                bl.editNote(noteId,noteToChange);
+                res = new Response();
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
 
 
         // ----- mangment 
