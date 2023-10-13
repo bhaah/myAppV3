@@ -96,6 +96,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             if (_tasks.ContainsKey(id))
             {
                 _tasks[id].delete();
+                _tasks.Remove(id);
             }
         }
     }

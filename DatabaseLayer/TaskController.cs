@@ -15,7 +15,7 @@ namespace WebApplication2.DatabaseLayer
         private const string ColToStart = "toStart";
         private const string ColStatus = "status";
         private const string ColCorId = "corId";
-        private const string timeFormat = "yyyy-MM-dd HH:mm:ss";
+       
 
 
 
@@ -67,8 +67,8 @@ namespace WebApplication2.DatabaseLayer
             int id = taskDTO.Id;
             string name = taskDTO.Name;   
             string description = taskDTO.Description;
-            string deadline = taskDTO.Deadline.ToString(timeFormat);
-            string toStart = taskDTO.ToStart.ToString(timeFormat);
+            string deadline = taskDTO.Deadline.ToString(DBF.timeFormat);
+            string toStart = taskDTO.ToStart.ToString(DBF.timeFormat);
             int corId = taskDTO.CorId;
             int status = taskDTO.Status;
             using(SQLiteConnection connection = new SQLiteConnection(connectionString))
@@ -154,13 +154,13 @@ namespace WebApplication2.DatabaseLayer
         }
         public void updateDeadline(int id,DateTime deadLine)
         {
-            string deadline = deadLine.ToString(timeFormat);
+            string deadline = deadLine.ToString(DBF.timeFormat);
             DBF.Update(TableName,ColDeadline,deadline,ColId, id);
         }
         public void updateTimeToStart(int id, DateTime timeToStartPar)
         {
-            string toStart = timeToStartPar.ToString(timeFormat);
-            DBF.Update(TableName, ColDeadline, toStart, ColId, id);
+            string toStart = timeToStartPar.ToString(DBF.timeFormat);
+            DBF.Update(TableName, ColToStart, toStart, ColId, id);
         }
 
         //delet query

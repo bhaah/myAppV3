@@ -28,10 +28,11 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
         public Note(int id,string content, int boardId)
         {
-            _id = id;
+           
+            _id =id;
             _note = content;
             _boardId = boardId;
-            ndto = new NoteDTO(content, id, boardId, true);
+            ndto = new NoteDTO(content, _id, boardId, true);
         }
         public Note(NoteDTO ndto)
         {

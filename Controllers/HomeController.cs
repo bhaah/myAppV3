@@ -52,8 +52,8 @@ namespace WebApplication2.Controllers
         //-----------------------
 
         // GET api/<HomeController>/5
-        [HttpGet("Boards")]
-        public IActionResult Get([FromQuery] string email, [FromQuery] string password)
+        [HttpPost("Boards")]
+        public IActionResult Get([FromForm] string email, [FromForm] string password)
         {
             Response res;
             if (Users.UserLogic.checkUser(email,password))
@@ -62,7 +62,8 @@ namespace WebApplication2.Controllers
                 {
 
                     BoardLogic board = BoardsOfUser.getUserBoards(email);
-                    res = new Response(board);
+                    Board[] boards = board.Boards.Values.ToList().ToArray();
+                    res = new Response(boards);
 
                 }
                 catch (Exception ex)

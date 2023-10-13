@@ -27,7 +27,7 @@ namespace WebApplication2.DatabaseLayer
             SQLiteParameter param = new SQLiteParameter(valuestring, par);
             command.Parameters.Add(param);
         }
-
+        internal static string timeFormat = "yyyy-MM-dd HH:mm:ss";
        
 
         internal static void prepare(SQLiteCommand command,SQLiteConnection con)
@@ -81,7 +81,7 @@ namespace WebApplication2.DatabaseLayer
             }
         }
 
-
+        // THES FUNS ARE THE SAME FOR ALL CONTROLLERS ========================================
         internal static void Update(string TableName,string colNameToChange,object valueToChange,string colPK,object valuePK)
         {
             using (SQLiteConnection connection = new SQLiteConnection(con))
@@ -122,5 +122,35 @@ namespace WebApplication2.DatabaseLayer
             }
         }
         
+        public static int getMaxId(string TableName,string ColId)
+        {
+            int toRet = 0;
+            using (SQLiteConnection connection = new SQLiteConnection(con))
+            {
+                SQLiteCommand command = new SQLiteCommand(connection);
+                int res = -1;
+                SQLiteDataReader reader = null;
+                try
+                {
+                    command.CommandText = $"SELECT MAX({ColId}) AS maxId FROM {TableName}";
+                    DBF.prepare(command, connection);
+                    reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        if (!Convert.IsDBNull(reader["maxId"]))
+                        {
+                            toRet = Convert.ToInt32(reader["maxId"]);
+                        }
+                    }
+                }
+                catch (Exception ex) { DBF.printEx(command, ex); }
+                finally
+                {
+                    if (reader != null) reader.Close();
+                    DBF.end(command, connection);
+                }
+            }
+            return toRet;
+        }
     }
 }

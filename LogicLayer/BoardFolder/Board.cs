@@ -35,7 +35,12 @@ namespace WebApplication2.LogicLayer.BoardFolder
             {
                 _corners.Add(corner.Id, new CornerOfTasks(corner));
             }
-
+            NoteController nc = new NoteController();
+            List<NoteDTO> noteDTOs= nc.getAllNotes(_id);
+            foreach (NoteDTO ndto in noteDTOs)
+            {
+                _notes.Add(ndto.Id, new Note(ndto));
+            }
             bdto = dto;
         }
 
@@ -75,6 +80,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public void removeCorner(int id)
         {
             if (!_corners.ContainsKey(id)) { throw new ArgumentException("there is no corner with this id "); }
+            
             _corners[id].deleteFromDB();       
             _corners.Remove(id);
         }
@@ -130,12 +136,16 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
         public void addNote(int id,string content) 
         {
-            _notes.Add(id,new Note(id,content,_id));            
+            NoteController nc = new NoteController();
+            int Id = nc.getMaxID()+1;
+            _notes.Add(Id,new Note(Id,content,_id));            
         }
         public void removeNote(int id) 
         {
-            _notes.Remove(id);
+           
+            
             _notes[id].deleteNote();
+            _notes.Remove(id);
         }
         public void updateNote(string note,int id)
         {
