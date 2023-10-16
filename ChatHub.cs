@@ -3,12 +3,15 @@ using WebApplication2.Singletons;
 using WebApplication2;
 using WebApplication2.LogicLayer;
 using System.Text.Json;
+using myFirstAppSol.LogicLayer;
 
 namespace myFirstAppSol
 {
     public sealed class ChatHub : Hub
     {
         private Dictionary<string, string> _usersConnctions=new Dictionary<string, string>();
+
+
 
         public async Task ConnectToServer(string email)
         {
@@ -35,7 +38,20 @@ namespace myFirstAppSol
             Users.UserLogic.UserById = dict;
         }
         
-
+        public async Task listen(string email)
+        {
+            while(true)
+            {
+                MessageLogic ml = new MessageLogic();
+                Message[] messagesToday = ml.getMessageOnDay(DateTime.Now);
+                foreach (Message message in messagesToday)
+                {
+                    if (message.Time.Hour == DateTime.Now.Hour && message.Time.Minute == DateTime.Now.Minute) { SendMessage(email,new Response(message)); }
+                }
+                await Task.Delay(60000);
+                //Console.WriteLine(DateTime.Now);
+            }
+        }
         public async Task SendMessage(string email,Response res)
         {
             Dictionary<string, string> dict = Users.UserLogic.UserById;
@@ -43,8 +59,9 @@ namespace myFirstAppSol
             Console.WriteLine(jres);
             try
             {
+                string id = dict[email];
                 Console.WriteLine(email+" : " + dict[email]);
-                await Clients.Client(dict[email]).SendAsync("ReceiveMessage", jres);
+                await Clients.Client(id).SendAsync("ReceiveMessage", jres);
             }
             catch(Exception ex)
             {
