@@ -37,7 +37,7 @@
             _time = time;
             if(toPersised)
             {
-                persist()
+                persist();
             }
             else
             {

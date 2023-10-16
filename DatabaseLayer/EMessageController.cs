@@ -33,8 +33,9 @@ namespace myFirstAppSol.DatabaseLayer
                 SQLiteCommand command = new SQLiteCommand(connection);
                 try
                 {
-                    command.CommandText = $"INSERT INTO {tableName} ({colId},{colContent},{colEmail},{colTime}) VALUES ({id},@conVal,{time},{email})";
+                    command.CommandText = $"INSERT INTO {tableName} ({colId},{colContent},{colEmail},{colTime}) VALUES ({id},@conVal,@emailVal,'{time}')";
                     DBF.convertVP(command, @"conVal", content);
+                    DBF.convertVP(command, @"emailVal", email);
                     DBF.prepare(command, connection);
                     command.ExecuteNonQuery();
                 }
@@ -83,11 +84,36 @@ namespace myFirstAppSol.DatabaseLayer
         public List<EMessageDTO> getInDate(DateTime date)
         {
             string time = date.ToString(DBF.timeFormat);
-            time = time.Substring(0, 8);
+            time = time.Substring(0, 10);
+            List<EMessageDTO> list = new List<EMessageDTO>();
+            using(SQLiteConnection connection =new SQLiteConnection(con))
+            {
+                SQLiteCommand command = new SQLiteCommand(connection);
+                SQLiteDataReader reader = null;
+                try
+                {
+                    command.CommandText = $"SELECT * FROM {tableName} WHERE {colTime} LIKE '%{time}%'";
+                    DBF.prepare(command,connection); reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        EMessageDTO emdto = new EMessageDTO(Convert.ToInt32(reader[colId]), (string)reader[colContent], (string)reader[colEmail], DateTime.Parse((string)reader[colTime]),false);
+                        list.Add(emdto);
+                    }
+                }
+                catch(Exception ex)
+                {
+                    DBF.printEx(command, ex);
+                }
+                finally { 
+                    if(reader != null) reader.Close();
+                    DBF.end(command, connection);
+                }
+            }
+            return list;
         }
         public int getMaxId()
         {
-            DBF.getMaxId(tableName, colId);
+            return DBF.getMaxId(tableName, colId);
         }
     }
 }

@@ -4,6 +4,7 @@ using WebApplication2.Singletons;
 using WebApplication2.LogicLayer.BoardFolder;
 using System.Text.Json;
 using WebApplication2.DatabaseLayer;
+using myFirstAppSol.LogicLayer;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApplication2.Controllers
@@ -452,7 +453,31 @@ namespace WebApplication2.Controllers
             }
             return Ok(JsonSerializer.Serialize(res));
         }
+        //===============================messages 
 
+
+
+
+        [HttpPost("addMessage")]
+        public IActionResult addMessage([FromForm] string email, [FromForm] string password, [FromForm] string content, [FromForm] DateTime time)
+        {
+            Response res;
+            try
+            {
+                BoardLogic bl = checkUser(email,password);
+                if(bl != null)
+                {
+                    MessageLogic ml = new MessageLogic();
+                    ml.setEmailMessage(content,email,time);
+                }
+                res = new Response();
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
 
         // ----- mangment 
 

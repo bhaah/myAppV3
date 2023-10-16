@@ -8,15 +8,24 @@ namespace WebApplication2.LogicLayer
         private List<User> _users;
         public List<User> Users { get { return _users; } }
 
+        private Dictionary< string,string> _usersById;
+        public Dictionary<string,string> UserById {
+            get { return _usersById; }
+            set { _usersById = value; }
+        }
+
         public UserLogic()
         {
             _users = new List<User>();
             UserController uc = new UserController();
             List<UserDTO> userDTOs = uc.getAllUsers();
+            _usersById = new Dictionary<string, string>();
             foreach(UserDTO userDTO in userDTOs)
             {
                 User toAdd = new User(userDTO);
                 _users.Add(toAdd);
+                _usersById.Add(toAdd.Email, null);
+
             }
         }
 
@@ -26,6 +35,7 @@ namespace WebApplication2.LogicLayer
             User newUser = new User(username,email,password);
             _users.Add(newUser);
             BoardsOfUser.addUser(newUser.Email);
+            _usersById.Add(email, null);
             return newUser;
         }
 

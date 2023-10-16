@@ -56,3 +56,5 @@ C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\refint\myFirstAppSol.
 C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.pdb
 C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\myFirstAppSol.genruntimeconfig.cache
 C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\net6.0\ref\myFirstAppSol.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\net6.0\Newtonsoft.Json.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\net6.0\System.Net.WebSockets.WebSocketProtocol.dll
