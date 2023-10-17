@@ -5,7 +5,7 @@ namespace myFirstAppSol.DatabaseLayer
 {
     public class RMessageController
     {
-        private const string tableName = "RMessage";
+        private const string tableName = "RMessages";
         private const string colId = "id";
         private const string colContent = "content";
 
@@ -49,7 +49,7 @@ namespace myFirstAppSol.DatabaseLayer
         public List<RMessageDTO> getRMessages()
         {
             List<RMessageDTO> toRet = new List<RMessageDTO>();
-            using(SQLiteConnection con= new SQLiteConnection(con))
+            using(SQLiteConnection con= new SQLiteConnection(this.con))
             {
                 SQLiteCommand command = new SQLiteCommand(con);
                 SQLiteDataReader reader = null;

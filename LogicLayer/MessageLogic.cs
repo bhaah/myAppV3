@@ -22,7 +22,7 @@ namespace myFirstAppSol.LogicLayer
             RMessageDTO[] msgsArray = msgs.ToArray();
             Random random = new Random();
             int randomIndex = random.Next(0, size);
-            return new Message(msgsArray[randomIndex]);
+            return new Message(msgsArray[randomIndex].Content);
         }
         public void setRandomMessage(string content) 
         {
@@ -61,11 +61,16 @@ namespace myFirstAppSol.LogicLayer
 
         public Message[] getMessagesForEmail(string email)
         {
+            List<EMessageDTO> lst = emc.getForEmail(email);
             List<Message> msgs = new List<Message>();
-            if(Emessges.ContainsKey(email) )
+            foreach (EMessageDTO emdto in lst)
             {
-                msgs = Emessges[email];
+                Message m = new Message(emdto);
+                msgs.Add(m);
+                Console.WriteLine(m.Content);
             }
+            
+           
             return msgs.ToArray();
         }
     }

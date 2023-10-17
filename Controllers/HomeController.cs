@@ -479,6 +479,43 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
         }
 
+        [HttpPost("addRandomMessage")]
+        public IActionResult addRMessage([FromForm] string content)
+        {
+            Response res;
+            try
+            {
+                MessageLogic ml = new MessageLogic();
+                ml.setRandomMessage(content);
+                res = new Response();
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message,null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+        [HttpPost("getEmailMessages")]
+        public IActionResult getEmailMessages([FromForm] string email, [FromForm]string password)
+        {
+            Response res;
+            try
+            {
+                Message[] ms;
+                if (checkUser(email, password) == null) { throw new Exception(""); }
+                    MessageLogic ml = new MessageLogic();
+                    ms = ml.getMessagesForEmail(email);
+                    res = new Response(ms);
+                
+                
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
         // ----- mangment 
 
 

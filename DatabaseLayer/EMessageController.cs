@@ -60,13 +60,15 @@ namespace myFirstAppSol.DatabaseLayer
                 SQLiteDataReader reader = null;
                 try
                 {
-                    command.CommandText = $"SELECT * FROM {tableName} WHERE {colEmail}={email}";
+                    command.CommandText = $"SELECT * FROM {tableName} WHERE {colEmail} LIKE '%{email}%'";
                     DBF.prepare(command, connection);
                     reader = command.ExecuteReader();
                     while (reader.Read())
                     {
-                        EMessageDTO toAdd = new EMessageDTO(Convert.ToInt32(reader[colId]), (string)reader[colContent],(string)reader[email],DateTime.Parse((string)reader[colTime]),false);
+                        //Console.WriteLine(reader.ToString());
+                        EMessageDTO toAdd = new EMessageDTO(Convert.ToInt32(reader[colId]), (string)reader[colContent],(string)reader[colEmail],DateTime.Parse((string)reader[colTime]),false);
                         list.Add(toAdd);
+                        //Console.WriteLine(toAdd.Content);
                     }
                 }
                 catch(Exception ex) { DBF.printEx(command, ex);

@@ -12,6 +12,7 @@ namespace myFirstAppSol.LogicLayer
         private DateTime _time;
         private EMessageDTO emdto;
 
+        public int Id { get { return _id; } }
         public string Email
         {
             get { return _email; }
