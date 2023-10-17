@@ -40,6 +40,8 @@ namespace myFirstAppSol
         
         public async Task listen(string email)
         {
+            int start = 0;
+            Random random = new Random();
             while(true)
             {
                 MessageLogic ml = new MessageLogic();
@@ -49,7 +51,16 @@ namespace myFirstAppSol
                     if (message.Time.Hour == DateTime.Now.Hour && message.Time.Minute == DateTime.Now.Minute) { SendMessage(email,new Response(message)); }
                 }
                 await Task.Delay(60000);
-                //Console.WriteLine(DateTime.Now);
+                if (start > 5 && random.Next(0, 100) < 50)
+                {
+                    Message toSent = ml.getRandomMessage();
+                    if (toSent != null)
+                    {
+                        SendMessage(email, new Response(toSent));
+                    }
+                    start = 0;
+                }
+                else start++;
             }
         }
         public async Task SendMessage(string email,Response res)

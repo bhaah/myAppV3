@@ -5,6 +5,7 @@ namespace myFirstAppSol.LogicLayer
     public class MessageLogic
     {
         private EMessageController emc = new EMessageController();
+        private RMessageController rmc= new RMessageController();
         private Dictionary<string, List<Message>> Emessges; // email : id of message
 
         public MessageLogic() {
@@ -13,13 +14,20 @@ namespace myFirstAppSol.LogicLayer
 
         //the random messages =========================================
 
-        //public Message getRandomMessage()
-        //{
-
-        //}
+        public Message getRandomMessage()
+        {
+            List<RMessageDTO> msgs = new List<RMessageDTO>();
+            msgs = rmc.getRMessages();
+            int size = msgs.Count;
+            RMessageDTO[] msgsArray = msgs.ToArray();
+            Random random = new Random();
+            int randomIndex = random.Next(0, size);
+            return new Message(msgsArray[randomIndex]);
+        }
         public void setRandomMessage(string content) 
         {
-            
+            int id = rmc.getMaxId()+1;
+            RMessageDTO rm = new RMessageDTO(id,content,true);
         }
 
 
