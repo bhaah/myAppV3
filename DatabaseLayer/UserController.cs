@@ -16,7 +16,7 @@ namespace WebApplication2.DatabaseLayer
         //C:\Users\bhaah\OneDrive\שולחן העבודה\WebApplication2\DatabaseLayer\MyAppDatabase.db
         public UserController()
         {
-            path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "DatabaseLayer\\MyAppDatabase.db"));
+            path = Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "DatabaseLayer/MyAppDatabase.db"));
             connectionString = $"Data Source={path}; Version=3; ";
         }
         private void convertValToPar(SQLiteCommand command, string valuestring, object par)

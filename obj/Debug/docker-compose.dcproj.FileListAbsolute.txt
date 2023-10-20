@@ -1,0 +1,15 @@
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\myFirstAppSol.deps.json
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\myFirstAppSol.runtimeconfig.json
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\appsettings.Development.json
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\appsettings.json
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\myFirstAppSol.exe
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\myFirstAppSol.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\System.Data.SQLite.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\Swashbuckle.AspNetCore.Swagger.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\Microsoft.OpenApi.dll
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\bin\Debug\myFirstAppSol.pdb
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\docker-compose.dcproj.AssemblyReference.cache
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\docker-compose.dcproj.CoreCompileInputs.cache
+C:\Users\bhaah\Source\Repos\bhaah\myAppV3\obj\Debug\docker-compose.dcproj.CopyComplete

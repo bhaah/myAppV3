@@ -19,7 +19,7 @@ namespace WebApplication2.DatabaseLayer
         {
             get
             {
-                return Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "DatabaseLayer\\MyAppDatabase.db"));
+                return Path.GetFullPath(Path.Combine(Directory.GetCurrentDirectory(), "DatabaseLayer/MyAppDatabase.db"));
             }
         }
         internal static void convertVP(SQLiteCommand command, string valuestring, object par)
