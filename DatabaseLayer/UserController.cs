@@ -108,7 +108,7 @@ namespace WebApplication2.DatabaseLayer
             string email = user.Email;
             string userName = user.UserName;
             string password = user.Password;
-
+            Console.WriteLine("path: "+path)
             using(SQLiteConnection connection = new SQLiteConnection(connectionString))
             {
                 SQLiteCommand command = new SQLiteCommand(connection);
