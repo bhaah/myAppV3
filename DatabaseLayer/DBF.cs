@@ -23,7 +23,7 @@ namespace WebApplication2.DatabaseLayer
                 connection = new MySqlConnection(connectionString);
                 connection.Open();
                 string[] cols_values = getParms(map);
-                string sqlQuery = $"INSERT INTO {tableName} {cols_values[0]} VALUES {cols_values[1]}";
+                string sqlQuery = $"INSERT INTO {tableName} {cols_values[0]} VALUES {cols_values[1]};";
                 cmd = new MySqlCommand(sqlQuery, connection);
                 cmd.ExecuteNonQuery();
             }
@@ -46,10 +46,10 @@ namespace WebApplication2.DatabaseLayer
             foreach (string key in map.Keys)
             {
                 columns += $" {key},";
-                values += $" {map[key]},";
+                values += $" '{map[key]}',";
             }
-            columns = columns.Substring(0, columns.Length - 2) + ")";
-            values = values.Substring(0, values.Length - 2) + ")";
+            columns = columns.Substring(0, columns.Length - 1) + ")";
+            values = values.Substring(0, values.Length - 1) + ")";
             return new string[] { columns, values };
         }
 
