@@ -1,6 +1,8 @@
-﻿namespace myFirstAppSol.DatabaseLayer
+﻿using MySql.Data.MySqlClient;
+
+namespace myFirstAppSol.DatabaseLayer
 {
-    public class DTO
+    public abstract class DTO
     {
     }
 }

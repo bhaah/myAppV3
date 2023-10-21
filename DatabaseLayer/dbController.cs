@@ -1,6 +1,11 @@
-﻿namespace myFirstAppSol.DatabaseLayer
+﻿using MySql.Data.MySqlClient;
+
+namespace myFirstAppSol.DatabaseLayer
 {
-    public class dbController
+    public abstract class dbController<T>
     {
+
+
+        public abstract List<T> getDTO(MySqlDataReader reader);
     }
 }
