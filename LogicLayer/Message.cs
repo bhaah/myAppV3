@@ -54,6 +54,10 @@ namespace myFirstAppSol.LogicLayer
             this.emdto = emdto;
         }
 
-
+        public void delete()
+        {
+            EMessageController emc = new EMessageController();
+            emc.deleteMessage(Id);
+        }
     }
 }

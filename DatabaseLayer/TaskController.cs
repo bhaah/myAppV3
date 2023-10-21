@@ -1,10 +1,12 @@
-﻿using System.Data.SqlClient;
+﻿using myFirstAppSol.DatabaseLayer;
+using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 using System.Data.SQLite;
 using System.Runtime.CompilerServices;
 
 namespace WebApplication2.DatabaseLayer
 {
-    public class TaskController
+    public class TaskController:dbController<TaskDTO>
     {
         //table props
         private const string TableName = "Tasks";
@@ -20,47 +22,16 @@ namespace WebApplication2.DatabaseLayer
 
 
 
-        //for connection
-        private string path;
-        private string connectionString;
-
         //constructor
         public TaskController()
         {
-            path = DBF.path;
-            connectionString = DBF.con;
+          
         }
 
         //get and insert querys
         public int getMaxID()
         {
-            int toRet = 0;
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-            {
-                SQLiteCommand command = new SQLiteCommand(connection);
-                int res = -1;
-                SQLiteDataReader reader = null;
-                try
-                {
-                    command.CommandText = $"SELECT MAX({ColId}) AS maxId FROM {TableName}";
-                    DBF.prepare(command, connection);
-                    reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-                        if (!Convert.IsDBNull(reader["maxId"]))
-                        {
-                            toRet = Convert.ToInt32(reader["maxId"]);
-                        }
-                    }
-                }
-                catch (Exception ex) { DBF.printEx(command, ex); }
-                finally
-                {
-                    if (reader != null) reader.Close();
-                    DBF.end(command, connection);
-                }
-            }
-            return toRet;
+            return DBF.getMaxId(TableName, ColId);
         }
         public void Insert(TaskDTO taskDTO)
         {
@@ -71,66 +42,41 @@ namespace WebApplication2.DatabaseLayer
             string toStart = taskDTO.ToStart.ToString(DBF.timeFormat);
             int corId = taskDTO.CorId;
             int status = taskDTO.Status;
-            using(SQLiteConnection connection = new SQLiteConnection(connectionString))
-            {
-                SQLiteCommand command = new SQLiteCommand(connection);
-                try
-                {
-                    command.CommandText = $"INSERT INTO {TableName} ({ColId}, {ColName}, {ColDesc}, {ColDeadline}, {ColToStart}, {ColStatus}, {ColCorId}) VALUES (@idVal, @nameVal, @descVal, @dlVal, @tsVal ,@statusVal, @corIdVal)";
-                    DBF.convertVP(command, @"idVal", id);
-                    DBF.convertVP(command, @"nameVal", name);
-                    DBF.convertVP(command, @"descVal", description);
-                    DBF.convertVP(command, @"dlVal", deadline);
-                    DBF.convertVP(command, @"tsVal" ,toStart);
-                    DBF.convertVP(command, @"statusVal", status);
-                    DBF.convertVP(command, @"corIdVal", corId);
-                    DBF.prepare(command,connection);
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    DBF.printEx(command,ex);
+            Dictionary<string,object> data = new Dictionary<string,object>();
+            data.Add(ColName, name);
+            data.Add(ColDesc, description);
+            data.Add(ColId, id);
+            data.Add(ColDeadline, deadline);
+            data.Add(ColToStart, toStart);
+            data.Add(ColStatus, status);
+            data.Add(ColCorId, corId);
+            DBF.Insert(data, TableName);
 
-                }
-                finally
-                {
-                    DBF.end(command, connection);
-                }
+
+
+           
+        }
+
+
+        public override List<TaskDTO> getDTO(MySqlDataReader reader)
+        {
+            List<TaskDTO> toRet= new List<TaskDTO>();
+            while (reader.Read())
+            {
+
+                string dateTimeDeadLine = (string)reader[ColDeadline];
+                DateTime deadLine = DateTime.Parse(dateTimeDeadLine);
+                string dateTimeToStart = (string)reader[ColToStart];
+                DateTime toStart = DateTime.Parse(dateTimeToStart);
+
+                TaskDTO tdto = new TaskDTO(Convert.ToInt32(reader[ColId]), (string)reader[ColName], (string)reader[ColDesc], deadLine, toStart, Convert.ToInt32(reader[ColStatus]), Convert.ToInt32(reader[ColCorId]), false);
+                toRet.Add(tdto);
             }
+            return toRet;
         }
         public List<TaskDTO> getTasks(int coriD)
         {
-            List<TaskDTO> toRet = new List<TaskDTO>();
-            using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-            {
-                SQLiteCommand command = new SQLiteCommand(connection);
-                SQLiteDataReader reader = null;
-                try
-                {
-                    command.CommandText = $"SELECT * FROM {TableName} WHERE {ColCorId}={coriD}";
-                    DBF.prepare(command, connection);
-                    reader = command.ExecuteReader();
-                    while (reader.Read())
-                    {
-
-                        string dateTimeDeadLine = (string)reader[ColDeadline];
-                        DateTime deadLine = DateTime.Parse(dateTimeDeadLine);
-                        string dateTimeToStart = (string)reader[ColToStart];
-                        DateTime toStart= DateTime.Parse(dateTimeToStart);
-
-                        TaskDTO tdto = new TaskDTO(Convert.ToInt32(reader[ColId]), (string)reader[ColName], (string)reader[ColDesc], deadLine, toStart, Convert.ToInt32(reader[ColStatus]), Convert.ToInt32(reader[ColCorId]), false);
-                        toRet.Add(tdto);
-                    }
-
-                }
-                catch (Exception ex) { DBF.printEx(command, ex); }
-                finally
-                {
-                    if (reader != null) { reader.Close(); }
-                    DBF.end(command, connection);
-                }
-            }
-            return toRet;
+            return DBF.getDTOs(TableName, this, $"WHERE {ColCorId}={coriD}");
 
         }
 

@@ -522,10 +522,7 @@ namespace WebApplication2.Controllers
         [HttpGet("deleteAllData")]
         public IActionResult GetClean() 
         {
-            DBF.cleanData("Tasks");
-            DBF.cleanData("CornerTable");
-            DBF.cleanData("Board");
-            DBF.cleanData("Users");
+           
             return Ok();
         }
 

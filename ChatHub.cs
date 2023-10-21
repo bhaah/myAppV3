@@ -48,7 +48,10 @@ namespace myFirstAppSol
                 Message[] messagesToday = ml.getMessageOnDay(DateTime.Now);
                 foreach (Message message in messagesToday)
                 {
-                    if (message.Time.Hour == DateTime.Now.Hour && message.Time.Minute == DateTime.Now.Minute) { SendMessage(email,new Response(message)); }
+                    if (message.Time.Hour == DateTime.Now.Hour && message.Time.Minute == DateTime.Now.Minute) { 
+                        SendMessage(email,new Response(message));
+                        message.delete();
+                    }
                 }
                 await Task.Delay(60000);
                 if (start > 5 && random.Next(0, 100) < 50)

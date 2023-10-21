@@ -1,80 +1,46 @@
-﻿using System.Data.SQLite;
+﻿using MySql.Data.MySqlClient;
+using System.Data.SQLite;
 using WebApplication2.DatabaseLayer;
 
 namespace myFirstAppSol.DatabaseLayer
 {
-    public class RMessageController
+    public class RMessageController : dbController<RMessageDTO>
     {
         private const string tableName = "RMessages";
         private const string colId = "id";
         private const string colContent = "content";
 
-        private string path;
-        private string con;
-
-
+   
 
         public RMessageController()
         {
-            path = DBF.path;
-            con = DBF.con;
+         
         }
 
+
+        public override List<RMessageDTO> getDTO(MySqlDataReader reader)
+        {
+            List<RMessageDTO> rMessageDTOs= new List<RMessageDTO>();
+            while (reader.Read())
+            {
+                RMessageDTO rm = new RMessageDTO(Convert.ToInt32(reader[colId]), (string)reader[colContent], false);
+                rMessageDTOs.Add(rm);
+            }
+            return rMessageDTOs;
+        }
         public void Insert(RMessageDTO rmdto)
         {
             int id = rmdto.Id;
             string content = rmdto.Content;
-            using(SQLiteConnection connection= new SQLiteConnection(con))
-            {
-                SQLiteCommand command = new SQLiteCommand(connection);
-                try
-                {
-                    command.CommandText = $"INSERT INTO {tableName} ({colId},{colContent}) VALUES ({id},@conVal)";
-                    DBF.convertVP(command, @"conVal", content);
-                    DBF.prepare(command, connection);
-                    command.ExecuteNonQuery();
-                }
-                catch (Exception ex)
-                {
-                    DBF.printEx(command, ex);
-
-                }
-                finally
-                {
-                    DBF.end(command, connection);
-                }
-            }
+            Dictionary<string,object> dic = new Dictionary<string,object>();
+            dic.Add(colId, id);
+            dic.Add(colContent, content);
+            DBF.Insert(dic, tableName);
         }
 
         public List<RMessageDTO> getRMessages()
         {
-            List<RMessageDTO> toRet = new List<RMessageDTO>();
-            using(SQLiteConnection con= new SQLiteConnection(this.con))
-            {
-                SQLiteCommand command = new SQLiteCommand(con);
-                SQLiteDataReader reader = null;
-                try
-                {
-                    command.CommandText = $"SELECT * FROM {tableName} ";
-                    DBF.prepare(command, con);
-                    reader = command.ExecuteReader();
-                    while(reader.Read())
-                    {
-                        RMessageDTO rm=new RMessageDTO(Convert.ToInt32(reader[colId]),(string)reader[colContent],false);
-                        toRet.Add(rm);
-                    }
-                }
-                catch(Exception ex)
-                {
-                    DBF.printEx(command, ex);
-                }
-                finally
-                {
-                    if(reader != null) reader.Close();
-                    DBF.end(command, con);
-                }
-            }
-            return toRet;
+            return DBF.getDTOs(tableName, this, null);
         }
 
         public int getMaxId()

@@ -66,5 +66,11 @@ namespace myFirstAppSol.DatabaseLayer
         {
             return DBF.getMaxId(tableName, colId);
         }
+
+
+        public void deleteMessage(int id)
+        {
+            DBF.delete(tableName, colId, id);
+        }
     }
 }
