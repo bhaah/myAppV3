@@ -28,6 +28,11 @@ namespace WebApplication2.Singletons
             if(userBoards==null)
             {
                 userBoards= new Dictionary<string, BoardLogic>();
+                List<User> users = Users.UserLogic.Users;
+                foreach (User user in users)
+                {
+                    userBoards.Add(user.Email, new BoardLogic(user.Email));
+                }
             }
             userBoards.Add(email, new BoardLogic(email));
         }
