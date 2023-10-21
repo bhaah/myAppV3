@@ -97,9 +97,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
         //tasks: ----------------------------------
 
-        public void creatTask(int CorID, int taskId, string name, string desc, DateTime dateTime)
+        public Task creatTask(int CorID, int taskId, string name, string desc, DateTime dateTime)
         {
-            _corners[CorID].creatTask(name, desc, taskId, dateTime);
+            return _corners[CorID].creatTask(name, desc, taskId, dateTime);
         }
         public void moveTask(int CorID, int taskId)
         {

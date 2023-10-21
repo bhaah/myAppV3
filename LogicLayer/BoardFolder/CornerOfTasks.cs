@@ -85,11 +85,12 @@ namespace WebApplication2.LogicLayer.BoardFolder
 
         //tasks behaviors :
 
-        public void creatTask(string name, string description, int id, DateTime deadLine)
+        public Task creatTask(string name, string description, int id, DateTime deadLine)
         {
             int taskId  = tc.getMaxID()+1;
             Task task = new Task(name, description, taskId, deadLine,_corId);
             _pages[0].addTask(task);
+            return task;
         }
         public void moveTask(int id)
         {

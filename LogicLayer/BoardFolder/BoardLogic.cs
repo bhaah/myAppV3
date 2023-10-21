@@ -92,10 +92,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
         
         //tasks:
-        public void creatTask(int corId,int taskId,string taskName,string taskDesc,DateTime dateTime) 
+        public Task creatTask(int corId,int taskId,string taskName,string taskDesc,DateTime dateTime) 
         {
             checkBoard();
-            currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
+            return currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
         }
         public void deleteTask(int boardId,int corId,int taskId) 
         {
