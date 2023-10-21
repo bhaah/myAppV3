@@ -9,10 +9,10 @@ namespace WebApplication2.DatabaseLayer
     public class CornerController : dbController<CornerDTO>
     {
 
-        private const string TableName = "CornerTable";
+        private const string TableName = "Corners";
         private const string ColId = "CorId";
         private const string ColName = "name";
-        private const string ColDesc = "desc";
+        private const string ColDesc = "des";
         private const string ColProgress = "progress";
         private const string ColBoardId = "boardId";
 
