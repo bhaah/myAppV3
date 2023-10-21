@@ -1,6 +1,8 @@
-﻿namespace WebApplication2.DatabaseLayer
+﻿using myFirstAppSol.DatabaseLayer;
+using MySql.Data.MySqlClient;
+namespace WebApplication2.DatabaseLayer
 {
-    public class BoardDTO
+    public class BoardDTO : DTO
     {
         private int _id;
         private string _name;
@@ -63,5 +65,7 @@
             bc.deleteBoad(Id);
             isPersisted= false;
         }
+
+
     }
 }
