@@ -88,15 +88,15 @@ namespace WebApplication2.Controllers
 
         // POST api/<HomeController>
         [HttpPost("creatBoard")]
-        public void Post([FromForm] string email, [FromForm] string password,[FromForm]string nameOfBoard,[FromForm]int BoardId)
+        public IActionResult Post([FromForm] string email, [FromForm] string password,[FromForm]string nameOfBoard,[FromForm]int BoardId)
         {
             Response res;
             try
             {
                 BoardLogic boards = checkUser(email, password);
-                boards.creatBoard(nameOfBoard);
+                
                 //BoardsOfUser.setBoardLoic(boards, email);
-                res= new Response();
+                res= new Response(boards.creatBoard(nameOfBoard));
                 Console.WriteLine(res.ToString());
             }
             catch(Exception ex)
@@ -104,11 +104,12 @@ namespace WebApplication2.Controllers
                 res = new Response(ex.Message,null);
             }
             Console.WriteLine(JsonSerializer.Serialize(res));
+            return Ok(JsonSerializer.Serialize(res));
             
         }
 
         [HttpPost("getInBoard")]
-        public void Post([FromForm] string email,[FromForm]string password,[FromForm]int BoardId)
+        public IActionResult Post([FromForm] string email,[FromForm]string password,[FromForm]int BoardId)
         {
             Response res;
             try
@@ -123,6 +124,7 @@ namespace WebApplication2.Controllers
                 res = new Response(ex.Message,null);
             }
             Console.WriteLine(JsonSerializer.Serialize(res));
+            return Ok(JsonSerializer.Serialize(res));
         }
 
         [HttpPost("getOutFromBoard")]

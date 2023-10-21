@@ -33,11 +33,12 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
 
         // controling the boards list
-        public void creatBoard(string name) 
+        public Board creatBoard(string name) 
         {
             int id = bc.getMaxID() + 1;
             Board newBoard = new Board(id, name,email);
             _board.Add(id, newBoard);
+            return newBoard;
         }
         public void getInBoard(int id) 
         {

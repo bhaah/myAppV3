@@ -45,7 +45,7 @@ namespace WebApplication2.DatabaseLayer
             string values = "(";
             foreach (string key in map.Keys)
             {
-                columns += $" {key},";
+                columns += $" '{key}',";
                 values += $" '{map[key]}',";
             }
             columns = columns.Substring(0, columns.Length - 1) + ")";
