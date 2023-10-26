@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Builder;
 using myFirstAppSol;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -10,22 +11,15 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSignalR();
 builder.Services.AddHostedService<MessageSender>();
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("MyPolicy", builder =>
-    {
-        builder.AllowAnyOrigin()
-            .AllowAnyMethod()
-            .AllowAnyHeader();
-    });
-});
+
 
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseCors("MyPolicy");
+    
     app.UseSwagger();
     app.UseSwaggerUI();
 }
