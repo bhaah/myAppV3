@@ -1,0 +1,64 @@
+name: dockercompose12273173354006925534
+services:
+  myfirstappsol:
+    build:
+      context: C:\Users\bhaah\Source\Repos\bhaah\myAppV3
+      dockerfile: Dockerfile
+      labels:
+        com.microsoft.created-by: visual-studio
+        com.microsoft.visual-studio.project-name: myFirstAppSol
+    container_name: myFirstAppSol
+    entrypoint:
+      - C:\remote_debugger\x64\msvsmon.exe
+      - /noauth
+      - /anyuser
+      - /silent
+      - /nostatus
+      - /noclrwarn
+      - /nosecuritywarn
+      - /nofirewallwarn
+      - /nowowwarn
+      - /fallbackloadremotemanagedpdbs
+      - /timeout:2147483646
+      - /LogDebuggeeOutputToStdOut
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: myfirstappsol
+    labels:
+      com.microsoft.visual-studio.project-name: myFirstAppSol
+      com.microsoft.visualstudio.debuggee.arguments: ' --additionalProbingPath c:\.nuget\packages  "C:\app\myFirstAppSol.dll"'
+      com.microsoft.visualstudio.debuggee.killprogram: C:\remote_debugger\x64\utils\KillProcess.exe dotnet.exe
+      com.microsoft.visualstudio.debuggee.program: '"C:\Program Files\dotnet\dotnet.exe"'
+      com.microsoft.visualstudio.debuggee.workingdirectory: C:\app
+    networks:
+      default: null
+    ports:
+      - mode: ingress
+        target: 80
+        protocol: tcp
+      - mode: ingress
+        target: 443
+        protocol: tcp
+    volumes:
+      - type: bind
+        source: C:\Users\bhaah\AppData\Roaming/ASP.NET/Https
+        target: C:\Users\ContainerUser\AppData\Roaming\ASP.NET\Https
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\bhaah\AppData\Roaming/Microsoft/UserSecrets
+        target: C:\Users\ContainerUser\AppData\Roaming\Microsoft\UserSecrets
+        read_only: true
+        bind:
+          create_host_path: true
+      - type: bind
+        source: C:\Users\bhaah\onecoremsvsmon\17.4.11004.1991
+        target: C:\remote_debugger
+        read_only: true
+        bind:
+          create_host_path: true
+networks:
+  default:
+    name: dockercompose12273173354006925534_default
