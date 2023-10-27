@@ -5,6 +5,7 @@ using WebApplication2.LogicLayer.BoardFolder;
 using System.Text.Json;
 using WebApplication2.DatabaseLayer;
 using myFirstAppSol.LogicLayer;
+using Microsoft.AspNetCore.Cors;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApplication2.Controllers
@@ -30,10 +31,12 @@ namespace WebApplication2.Controllers
 
     [Route("api/[controller]")]
     [ApiController]
+    
     public class HomeController : ControllerBase
     {
         // GET: api/<HomeController>
         [HttpGet]
+        
         public IEnumerable<string> Get()
         {
             return new string[] { "value1", "value2" };
