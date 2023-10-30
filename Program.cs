@@ -16,7 +16,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
         builder => builder
-            .WithOrigins("http://localhost:5000", "https://mytodolistapp-fve8.onrender.com/") // Specify the allowed origins here
+            .WithOrigins("http://localhost:5000", "https://mytodolistapp-fve8.onrender.com") // Specify the allowed origins here
             .AllowAnyHeader()
             .AllowAnyMethod()
     );
