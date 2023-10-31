@@ -29,12 +29,12 @@ namespace WebApplication2.Controllers
 
         // POST api/<UserController>
         [HttpPost("register")]
-        public IActionResult Post([FromForm] string email, [FromForm] string userName, [FromForm] string password)
+        public IActionResult Post([FromForm] string email, [FromForm] string username, [FromForm] string password)
         {
             Response res;
             try
             {
-                var fun = Users.UserLogic.Register( userName,email, password);
+                var fun = Users.UserLogic.Register( username,email, password);
                 UserAccount.Account= fun;
                 res = new Response(fun);
             }
