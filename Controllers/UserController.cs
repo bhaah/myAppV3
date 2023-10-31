@@ -34,7 +34,7 @@ namespace WebApplication2.Controllers
             Response res;
             try
             {
-                var fun = Users.UserLogic.Register(email, userName, password);
+                var fun = Users.UserLogic.Register( userName,email, password);
                 UserAccount.Account= fun;
                 res = new Response(fun);
             }
