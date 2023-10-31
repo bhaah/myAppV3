@@ -34,7 +34,11 @@ namespace WebApplication2.Singletons
                     userBoards.Add(user.Email, new BoardLogic(user.Email));
                 }
             }
-            userBoards.Add(email, new BoardLogic(email));
+            else
+            {
+                userBoards.Add(email, new BoardLogic(email));
+            }
+            
         }
         public static void setBoardLoic(BoardLogic bl,string email)
         {
