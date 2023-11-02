@@ -56,7 +56,7 @@ namespace WebApplication2.Controllers
             }
             catch (Exception ex)
             {
-                res = new Response(ex);
+                res = new Response(ex.Message);
             }
             return Ok(JsonSerializer.Serialize(res));
         }
