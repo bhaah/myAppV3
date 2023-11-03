@@ -27,7 +27,7 @@ namespace WebApplication2.Controllers
 
 
 
-        // POST api/<UserController>
+        // POST api/User/register
         [HttpPost("register")]
         public IActionResult Post([FromForm] string email, [FromForm] string username, [FromForm] string password)
         {
