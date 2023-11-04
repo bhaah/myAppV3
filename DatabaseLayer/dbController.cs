@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Npgsql;
 
 namespace myFirstAppSol.DatabaseLayer
 {
@@ -6,6 +7,6 @@ namespace myFirstAppSol.DatabaseLayer
     {
 
 
-        public abstract List<T> getDTO(MySqlDataReader reader);
+        public abstract List<T> getDTO(NpgsqlDataReader reader);
     }
 }

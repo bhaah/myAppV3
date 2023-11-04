@@ -43,7 +43,7 @@ namespace myFirstAppSol.LogicLayer
                 _coins = 40;
                 _ownedAvatars = new List<string>();
                 _addDay= new List<DateTime>();
-                pdto= new ProfileDTO();
+                pdto= new ProfileDTO(email,_coins,_ownedAvatars,null,_addDay,true);
         }
 
 

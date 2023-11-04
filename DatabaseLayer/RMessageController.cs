@@ -1,4 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
+using Npgsql;
 using System.Data.SQLite;
 using WebApplication2.DatabaseLayer;
 
@@ -18,7 +19,7 @@ namespace myFirstAppSol.DatabaseLayer
         }
 
 
-        public override List<RMessageDTO> getDTO(MySqlDataReader reader)
+        public override List<RMessageDTO> getDTO(NpgsqlDataReader reader)
         {
             List<RMessageDTO> rMessageDTOs= new List<RMessageDTO>();
             while (reader.Read())

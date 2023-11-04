@@ -1,6 +1,7 @@
 ﻿using myFirstAppSol.DatabaseLayer;
 using System.Data.SQLite;
 using MySql.Data.MySqlClient;
+using Npgsql;
 
 namespace WebApplication2.DatabaseLayer
 {
@@ -24,7 +25,7 @@ namespace WebApplication2.DatabaseLayer
 
 
         //this to get the dtos from reader
-        public override List<BoardDTO> getDTO(MySqlDataReader reader) 
+        public override List<BoardDTO> getDTO(NpgsqlDataReader reader) 
         {
             List<BoardDTO> boardDTOs= new List<BoardDTO>();
             while (reader.Read())

@@ -1,5 +1,6 @@
 ﻿using myFirstAppSol.DatabaseLayer;
 using MySql.Data.MySqlClient;
+using Npgsql;
 using System.Data.SQLite;
 
 namespace WebApplication2.DatabaseLayer
@@ -25,7 +26,7 @@ namespace WebApplication2.DatabaseLayer
         }
         //----- get and add Users
 
-        public override List<UserDTO> getDTO(MySqlDataReader reader)
+        public override List<UserDTO> getDTO(NpgsqlDataReader reader)
         {
             List<UserDTO> toRet = new List<UserDTO>();
             while (reader.Read())

@@ -1,5 +1,6 @@
 ﻿using myFirstAppSol.DatabaseLayer;
 using MySql.Data.MySqlClient;
+using Npgsql;
 using System.Data.SQLite;
 using WebApplication2.LogicLayer.BoardFolder;
 
@@ -37,7 +38,7 @@ namespace WebApplication2.DatabaseLayer
 
         }
 
-        public override List<NoteDTO> getDTO(MySqlDataReader reader)
+        public override List<NoteDTO> getDTO(NpgsqlDataReader reader)
         {
             List<NoteDTO> list = new List<NoteDTO>();
             while (reader.Read())

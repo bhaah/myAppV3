@@ -2,6 +2,7 @@
   "ExpandedNodes": [
     "",
     "\\Controllers",
+    "\\DatabaseLayer",
     "\\LogicLayer"
   ],
   "SelectedNode": "\\myFirstAppSol.sln",

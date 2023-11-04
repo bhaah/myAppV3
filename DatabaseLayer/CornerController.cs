@@ -1,6 +1,7 @@
 ﻿using myFirstAppSol.DatabaseLayer;
 using MySql.Data.MySqlClient;
 using MySqlX.XDevAPI.Common;
+using Npgsql;
 using System.Data.SQLite;
 using WebApplication2.LogicLayer.BoardFolder;
 
@@ -45,7 +46,7 @@ namespace WebApplication2.DatabaseLayer
             DBF.Insert(data, TableName);
         }
 
-        public override List<CornerDTO> getDTO(MySqlDataReader reader)
+        public override List<CornerDTO> getDTO(NpgsqlDataReader reader)
         {
             List<CornerDTO> result = new List<CornerDTO>();
             while (reader.Read())
