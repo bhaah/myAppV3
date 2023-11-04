@@ -7,8 +7,8 @@ namespace myFirstAppSol.DatabaseLayer
     public class EMessageController : dbController<EMessageDTO>
     {
         private const string tableName = "EMessages";
-        private const string colId = "id";
-        private const string colContent = "content";
+        private const string colId = "EMid";
+        private const string colContent = "EMcontent";
         private const string colTime = "timeToSend";
         private const string colEmail = "email";
 

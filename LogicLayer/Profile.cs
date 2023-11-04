@@ -50,9 +50,11 @@ namespace myFirstAppSol.LogicLayer
         public Profile(ProfileDTO profileDto)
         {
             pdto= profileDto;
+            _email= profileDto.Email;
             _currAvatar= profileDto.CurrentAvatar;
             _coins= profileDto.Coins;
             _ownedAvatars = profileDto.OwnedAvatars;
+            _addDay= profileDto.dateTimes;
         }
         //==============================
 

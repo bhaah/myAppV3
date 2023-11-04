@@ -9,7 +9,7 @@ namespace WebApplication2.DatabaseLayer
     {
         private const string TableName = "NoteTable" ;
         private const string ColId = "NoteId";
-        private const string ColName = "name" ;
+        private const string ColName = "noteName";
         private const string ColBoardId = "boardId" ;
 
 

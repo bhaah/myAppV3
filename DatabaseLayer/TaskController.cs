@@ -11,7 +11,7 @@ namespace WebApplication2.DatabaseLayer
         //table props
         private const string TableName = "Tasks";
         private const string ColId = "TaskId";
-        private const string ColName = "Name";
+        private const string ColName = "TaskName";
         private const string ColDesc = "Description";
         private const string ColDeadline = "Deadline";
         private const string ColToStart = "toStart";

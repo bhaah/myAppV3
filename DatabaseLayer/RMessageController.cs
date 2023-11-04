@@ -7,8 +7,8 @@ namespace myFirstAppSol.DatabaseLayer
     public class RMessageController : dbController<RMessageDTO>
     {
         private const string tableName = "RMessages";
-        private const string colId = "id";
-        private const string colContent = "content";
+        private const string colId = "RMid";
+        private const string colContent = "RMcontent";
 
    
 

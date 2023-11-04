@@ -11,7 +11,7 @@ namespace WebApplication2.DatabaseLayer
 
         private const string TableName = "Corners";
         private const string ColId = "CorId";
-        private const string ColName = "name";
+        private const string ColName = "nameCor";
         private const string ColDesc = "des";
         private const string ColProgress = "progress";
         private const string ColBoardId = "boardId";

@@ -1,7 +1,8 @@
 {
   "ExpandedNodes": [
     "",
-    "\\Controllers"
+    "\\Controllers",
+    "\\LogicLayer"
   ],
   "SelectedNode": "\\myFirstAppSol.sln",
   "PreviewInSolutionExplorer": false
