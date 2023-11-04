@@ -21,22 +21,43 @@ namespace myFirstAppSol.DatabaseLayer
         public int Coins
         {
             get { return _coins; }
-            set { _coins = value; }
+            set { 
+                if(!isPersisted)
+                {
+                    pCon.updateCoins(Email, value);
+                }    
+                _coins = value;
+            }
         }
         public List<string> OwnedAvatars
         {
             get { return _ownedAvatars; }
-            set { _ownedAvatars = value; }
+            set {
+                if (!isPersisted)
+                {
+                    pCon.updateOwnedAvatars(Email, value);
+                }
+                _ownedAvatars = value; }
         }
         public string CurrentAvatar
         {
             get { return _currAvatar; }
-            set { _currAvatar = value; }
+            set {
+                if (!isPersisted)
+                {
+                    pCon.updateCurrAvatar(Email, value);
+                }
+                _currAvatar = value; }
         }
 
         public List<DateTime> dateTimes {
             get { return _addDays; }
-            set { _addDays = value; }
+            set {
+                if (!isPersisted)
+                {
+                    pCon.updateAddedDates(Email, value);
+                }
+                _addDays = value; }
         }
 
 
@@ -51,11 +72,15 @@ namespace myFirstAppSol.DatabaseLayer
             else isPersisted= true;
         }
 
-
+        public void delete()
+        {
+            pCon.delete(Email);
+        }
 
         private void persist()
         {
-            
+            pCon.Insert(this);
+            isPersisted= true;
         }
 
     }

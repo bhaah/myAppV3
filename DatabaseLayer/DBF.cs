@@ -112,7 +112,7 @@ namespace WebApplication2.DatabaseLayer
         }
 
 
-        internal static void delete(string TableName, string colId, int id)
+        internal static void delete(string TableName, string colId, object id)
         {
             NpgsqlConnection connection = null;
             NpgsqlCommand cmd = null;

@@ -75,5 +75,10 @@ namespace WebApplication2.DatabaseLayer
             DBF.delete(TableName, ColId, id);
         }
 
+
+
+
+
+
     }
 }
