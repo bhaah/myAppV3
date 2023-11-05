@@ -21,9 +21,9 @@ namespace myFirstAppSol.LogicLayer
             get { return _coins; }
             
         }
-        public List<string> OwnedAvatars
+        public string[] OwnedAvatars
         {
-            get { return _ownedAvatars; }
+            get { return _ownedAvatars.ToArray(); }
             
         }
         public string CurrentAvatar
@@ -62,7 +62,7 @@ namespace myFirstAppSol.LogicLayer
         /// purchasing avatar 
         /// </summary>
         /// <param name="avatar"></param>
-        /// <returns></returns>
+        /// <returns    ></returns>
         public bool purchase(string avatar)
         {
             if (avatar == null || !Avatars.AvatarSales.ContainsKey(avatar)) return false;
@@ -93,6 +93,7 @@ namespace myFirstAppSol.LogicLayer
             {
                 pdto.Coins = _coins+amount;
                 _coins+=amount;
+                
             }
             else
             {
@@ -104,6 +105,25 @@ namespace myFirstAppSol.LogicLayer
             }
         }
 
+        /// <summary>
+        /// set avatar from owned
+        /// </summary>
+        /// <param name="avatar"></param>
+        public bool setAvatar(string avatar)
+        {
+            if (_ownedAvatars.Contains(avatar))
+            {
+                CurrentAvatar= avatar;
+                return true;
+            }
+            return false;
+        }
+
+
+        public void deleteProfile()
+        {
+            pdto.delete();
+        }
 
         // private fun's ================
         private bool checkAddOption()

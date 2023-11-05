@@ -50,13 +50,35 @@ namespace myFirstAppSol.DatabaseLayer
                 {ColOwnedAvatars,pdto.OwnedAvatars.ToArray()},
                 {ColAddedDates,pdto.dateTimes.Select(x=>x.ToString(DBF.timeFormat)).ToArray()},
             };
-            DBF.Insert(map, tableName);
+            NpgsqlConnection connection = null;
+            NpgsqlCommand cmd = null;
+            try
+            {
+                connection = new NpgsqlConnection("Host=dpg-ckp7srnkc2qc73dooufg-a.oregon-postgres.render.com;Port=5432;Database=myappdatabaseonrender;User Id=myappdatabaseonrender_user;Password=ilbicIliuWUhAEoIj9Ab8yS5DaFtFiOH;");
+                connection.Open();
+                
+                string sqlQuery = $"INSERT INTO {tableName} ({ColEmail}, {ColCoins}, {ColCurrAvatar}, {ColOwnedAvatars},{ColAddedDates}) VALUES ('{pdto.Email}','{pdto.Coins}','{pdto.CurrentAvatar}', @ownedAvatars, @addedDates);";                           
+                cmd = new NpgsqlCommand(sqlQuery, connection);
+                cmd.Parameters.AddWithValue("@ownedAvatars", map[ColOwnedAvatars]);
+                cmd.Parameters.AddWithValue("@addedDates", map[ColAddedDates]);
+                cmd.ExecuteNonQuery();
+            }
+            catch (Exception ex)
+            {
+                DBF.printEx(cmd, ex);
+            }
+            finally
+            {
+                if (cmd != null) { cmd.Dispose(); }
+                if (connection != null) { connection.Close(); }
+
+            }
         }
 
 
         public ProfileDTO getEmailProfile(string email)
         {
-            List<ProfileDTO> list =DBF.getDTOs(tableName, this, $"WHERE {ColEmail}={email}");
+            List<ProfileDTO> list =DBF.getDTOs(tableName, this, $"WHERE {ColEmail}='{email}'");
             foreach(ProfileDTO p in list) { return p; }
             
             return null;  

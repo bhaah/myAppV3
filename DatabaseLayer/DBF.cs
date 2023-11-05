@@ -42,7 +42,7 @@ namespace WebApplication2.DatabaseLayer
             }
         } 
         
-        private static string[] getParms(Dictionary<string, object> map)
+        public static string[] getParms(Dictionary<string, object> map)
         {
             string columns = "(";
             string values = "(";

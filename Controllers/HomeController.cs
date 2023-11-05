@@ -501,20 +501,121 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
         }
         [HttpPost("getEmailMessages")]
-        public IActionResult getEmailMessages([FromForm] string email, [FromForm]string password)
+        public IActionResult getRandomMessages([FromForm] string email, [FromForm]string password)
+        {
+            Response res;
+            try
+            {
+                Message ms;
+                
+                MessageLogic ml = new MessageLogic();
+                ms = ml.getRandomMessage();
+                res = new Response(ms);
+                
+                
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
+        [HttpPost("getRandomMessage")]
+        public IActionResult getEmailMessages([FromForm] string email, [FromForm] string password)
         {
             Response res;
             try
             {
                 Message[] ms;
                 if (checkUser(email, password) == null) { throw new Exception(""); }
-                    MessageLogic ml = new MessageLogic();
-                    ms = ml.getMessagesForEmail(email);
-                    res = new Response(ms);
-                
-                
+                MessageLogic ml = new MessageLogic();
+                ms = ml.getMessagesForEmail(email);
+                res = new Response(ms);
+
+
+            }
+            catch (Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
+
+        // ----------------------PROFILE
+
+        [HttpGet("userProfile")]
+        public IActionResult getProfile([FromForm] string email, [FromForm] string password)
+        {
+            Response res;
+
+            try
+            {
+                checkUser(email, password);
+                User user = Users.UserLogic.GetUser(email);
+                Profile p = user.Profile;
+                res = new Response(p);
             }
             catch(Exception ex)
+            {
+                res = new Response(ex.Message,null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
+
+        [HttpPost("purchase")]
+        public IActionResult postPurchase([FromForm] string email, [FromForm] string password, [FromForm]string avatar)
+        {
+            Response res;
+
+            try
+            {
+                checkUser(email, password);
+               
+                
+                res = new Response(Users.UserLogic.purchase(email,avatar));
+            }
+            catch (Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
+        [HttpPost("addCoins")]
+        public IActionResult postAddCoin([FromForm]string email, [FromForm]string password, [FromForm]int amount)
+        {
+            Response res;
+
+            try
+            {
+                checkUser(email, password);
+
+                Users.UserLogic.addCoins(email, amount, false);
+                res = new Response();
+            }
+            catch (Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
+        [HttpPost("setAvatar")]
+        public IActionResult postSetAvatar([FromForm]string email, [FromForm]string password, [FromForm]string avatar)
+        {
+            Response res;
+
+            try
+            {
+                checkUser(email, password);
+
+
+                res = new Response(Users.UserLogic.setAvatar(email, avatar));
+            }
+            catch (Exception ex)
             {
                 res = new Response(ex.Message, null);
             }

@@ -1,5 +1,6 @@
 ﻿using WebApplication2.Singletons;
 using WebApplication2.DatabaseLayer;
+using myFirstAppSol.LogicLayer;
 
 namespace WebApplication2.LogicLayer
 {
@@ -69,5 +70,30 @@ namespace WebApplication2.LogicLayer
             }
             return false;
         }
+
+
+        // profile featurs ========================================================
+
+        public void addCoins(string email,int amount,bool toCount)
+        {
+            User rec = GetUser(email);
+            rec.Profile.addCoins(amount, toCount);
+            
+        }
+
+        public bool purchase(string email,string avatar)
+        {
+            User req= GetUser(email);
+            return req.Profile.purchase(avatar);
+        }
+
+        public bool setAvatar(string email,string avatar)
+        {
+            User rec = GetUser(email);
+            return rec.Profile.setAvatar(avatar);
+        }
+
+        
+
     }
 }
