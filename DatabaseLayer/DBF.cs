@@ -14,7 +14,7 @@ namespace WebApplication2.DatabaseLayer
 
         //public const string connectionString = "Server=sql12.freesqldatabase.com;Database=sql12655161;User=sql12655161;Password=VmjNVLnRdI;";
 
-        private static string connectionString = "Host=dpg-ckp7srnkc2qc73dooufg-a.oregon-postgres.render.com;Port=5432;Database=myappdatabaseonrender;User Id=myappdatabaseonrender_user;Password=ilbicIliuWUhAEoIj9Ab8yS5DaFtFiOH;";
+        internal static string connectionString = "Host=dpg-ckp7srnkc2qc73dooufg-a.oregon-postgres.render.com;Port=5432;Database=myappdatabaseonrender;User Id=myappdatabaseonrender_user;Password=ilbicIliuWUhAEoIj9Ab8yS5DaFtFiOH;";
 
 
         public static void Insert(Dictionary<string, object> map , string tableName)

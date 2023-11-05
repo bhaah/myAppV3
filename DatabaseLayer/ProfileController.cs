@@ -56,7 +56,7 @@ namespace myFirstAppSol.DatabaseLayer
             Console.WriteLine("hi from insert profile");
             try
             {
-                connection = new NpgsqlConnection("Host=dpg-ckp7srnkc2qc73dooufg-a.oregon-postgres.render.com;Port=5432;Database=myappdatabaseonrender;User Id=myappdatabaseonrender_user;Password=ilbicIliuWUhAEoIj9Ab8yS5DaFtFiOH;");
+                connection = new NpgsqlConnection(DBF.connectionString);
                 connection.Open();
                 
                 string sqlQuery = $"INSERT INTO {tableName} ({ColEmail}, {ColCoins}, {ColCurrAvatar}, {ColOwnedAvatars},{ColAddedDates}) VALUES ('{pdto.Email}','{pdto.Coins}','{pdto.CurrentAvatar}', @ownedAvatars, @addedDates);";                           
