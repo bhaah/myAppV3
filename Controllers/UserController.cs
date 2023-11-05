@@ -31,6 +31,7 @@ namespace WebApplication2.Controllers
         [HttpPost("register")]
         public IActionResult Post([FromForm] string email, [FromForm] string username, [FromForm] string password)
         {
+            Console.WriteLine("hi");
             Response res;
             try
             {
