@@ -38,7 +38,8 @@ namespace myFirstAppSol.LogicLayer
         // constructor's ==========================
 
         public Profile(string email)
-        { 
+        {
+            Console.WriteLine("hi from profile const with persist :" + email);
                 _email= email;
                 _coins = 40;
                 _ownedAvatars = new List<string>();
