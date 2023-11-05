@@ -25,6 +25,7 @@ namespace myFirstAppSol.DatabaseLayer
             List<ProfileDTO> result = new List<ProfileDTO>();
             while(reader.Read())
             {
+                Console.WriteLine("the profile :" + ((string)reader[ColEmail]));
                 List<string> ownedAvatars = ((string[])reader[ColOwnedAvatars]).ToList();
                 List<string> addedDays = ((string[])reader[ColAddedDates]).ToList();
                 List<DateTime> parmDates = new List<DateTime>();
