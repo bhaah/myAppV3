@@ -18,6 +18,10 @@ namespace myFirstAppSol.LogicLayer
         {
             List<RMessageDTO> msgs = new List<RMessageDTO>();
             msgs = rmc.getRMessages();
+            foreach (RMessageDTO msg in msgs)
+            {
+                Console.WriteLine(msg.Content);
+            }
             int size = msgs.Count;
             RMessageDTO[] msgsArray = msgs.ToArray();
             Random random = new Random();

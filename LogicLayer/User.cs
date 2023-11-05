@@ -32,6 +32,7 @@ namespace WebApplication2.LogicLayer
             _email = email+"@bhaa.com";
             _password = password;
             userDTO = new UserDTO(_email, password,userName,true);
+            Console.WriteLine("hi from new User const ");
             _profile = new Profile(_email);
             string json = JsonConvert.SerializeObject(_profile); 
 

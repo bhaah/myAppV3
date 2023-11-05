@@ -500,7 +500,7 @@ namespace WebApplication2.Controllers
             }
             return Ok(JsonSerializer.Serialize(res));
         }
-        [HttpPost("getEmailMessages")]
+        [HttpPost("getRandomMessages")]
         public IActionResult getRandomMessages([FromForm] string email, [FromForm]string password)
         {
             Response res;
@@ -521,7 +521,7 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
         }
 
-        [HttpPost("getRandomMessage")]
+        [HttpPost("getEmailMessage")]
         public IActionResult getEmailMessages([FromForm] string email, [FromForm] string password)
         {
             Response res;

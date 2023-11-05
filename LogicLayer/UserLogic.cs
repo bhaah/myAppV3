@@ -17,12 +17,17 @@ namespace WebApplication2.LogicLayer
 
         public UserLogic()
         {
+            Console.WriteLine("20");
             _users = new List<User>();
+            Console.WriteLine("23");
             UserController uc = new UserController();
+            Console.WriteLine("25");
             List<UserDTO> userDTOs = uc.getAllUsers();
+            Console.WriteLine("27");
             _usersById = new Dictionary<string, string>();
             foreach(UserDTO userDTO in userDTOs)
             {
+                Console.WriteLine(userDTO.Email);
                 User toAdd = new User(userDTO);
                 _users.Add(toAdd);
                 _usersById.Add(toAdd.Email, null);
@@ -32,7 +37,7 @@ namespace WebApplication2.LogicLayer
 
         public User Register(string username,string email, string password)
         {
-
+            Console.WriteLine("we just enterd the register fun in UserLogic");
             User newUser = new User(username,email,password);
             _users.Add(newUser);
             BoardsOfUser.addUser(newUser.Email);

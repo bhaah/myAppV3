@@ -36,6 +36,7 @@ namespace WebApplication2.Controllers
             try
             {
                 Console.WriteLine("hi");
+                Console.WriteLine("hi from server");
                 var fun = Users.UserLogic.Register( username,email, password);
                 //sUserAccount.Account= fun;
                 res = new Response(fun);

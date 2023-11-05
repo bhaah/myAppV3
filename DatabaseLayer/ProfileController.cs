@@ -80,6 +80,7 @@ namespace myFirstAppSol.DatabaseLayer
 
         public ProfileDTO getEmailProfile(string email)
         {
+            Console.WriteLine(email + " we want to get his profile");
             List<ProfileDTO> list =DBF.getDTOs(tableName, this, $"WHERE {ColEmail}='{email}'");
             foreach(ProfileDTO p in list) {
                 Console.WriteLine(p.Email);
