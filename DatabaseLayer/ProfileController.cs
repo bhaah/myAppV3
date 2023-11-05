@@ -25,7 +25,7 @@ namespace myFirstAppSol.DatabaseLayer
             List<ProfileDTO> result = new List<ProfileDTO>();
             while(reader.Read())
             {
-                Console.WriteLine("the profile :" + ((string)reader[ColEmail]));
+                Console.WriteLine("--the profile :" + ((string)reader[ColEmail]));
                 List<string> ownedAvatars = ((string[])reader[ColOwnedAvatars]).ToList();
                 List<string> addedDays = ((string[])reader[ColAddedDates]).ToList();
                 List<DateTime> parmDates = new List<DateTime>();
@@ -80,7 +80,9 @@ namespace myFirstAppSol.DatabaseLayer
         public ProfileDTO getEmailProfile(string email)
         {
             List<ProfileDTO> list =DBF.getDTOs(tableName, this, $"WHERE {ColEmail}='{email}'");
-            foreach(ProfileDTO p in list) { return p; }
+            foreach(ProfileDTO p in list) {
+                Console.WriteLine(p.Email);
+                return p; }
             
             return null;  
             

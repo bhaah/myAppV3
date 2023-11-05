@@ -42,6 +42,7 @@ namespace WebApplication2.LogicLayer
             this.userDTO= userDTO;
             ProfileController profileController= new ProfileController();
             ProfileDTO pdto = profileController.getEmailProfile(_email);
+            _profile = new Profile(pdto);
         }
 
 
