@@ -36,7 +36,9 @@
             _userName= userName;
             if(toPersist & !_isPersisted)
             {
+                Console.WriteLine("we want to persist it");
                 persist();
+                Console.WriteLine("user must be persisted");
             }
             else
             {

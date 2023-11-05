@@ -1,5 +1,6 @@
 ﻿using myFirstAppSol.DatabaseLayer;
 using myFirstAppSol.LogicLayer;
+using Newtonsoft.Json;
 using WebApplication2.DatabaseLayer;
 using WebApplication2.LogicLayer.BoardFolder;
 
@@ -32,6 +33,9 @@ namespace WebApplication2.LogicLayer
             _password = password;
             userDTO = new UserDTO(_email, password,userName,true);
             _profile = new Profile(_email);
+            string json = JsonConvert.SerializeObject(_profile); 
+
+            Console.WriteLine("this is the profile:"+ json);
         }
 
         public User(UserDTO userDTO)
