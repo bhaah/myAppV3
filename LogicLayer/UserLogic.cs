@@ -57,7 +57,7 @@ namespace WebApplication2.LogicLayer
         {
             foreach(User user in _users)
             {
-                if(user.UserName==username) return user;
+                if(user.UserName==username || user.Email == username) return user;
             }
             throw new ArgumentException("there is no user like this");
         }
