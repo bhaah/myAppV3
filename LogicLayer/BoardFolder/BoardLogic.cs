@@ -112,7 +112,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             int newSatuts=currBoard.moveTask(corID, taskId);
             if(newSatuts==3)
             {
-                Users.UserLogic.addCoins(email, 8);
+                Users.UserLogic.addCoins(email, 8,true);
             }
         }
         public void editTaskName(int corId,int taskId,int status,string name) 

@@ -101,7 +101,7 @@ namespace WebApplication2.LogicLayer
         public Dictionary<string,int> getStoreAvatars(string email)
         {
             User user = GetUser(email);
-            return user.Profile.getStore()
+            return user.Profile.getStore();
         }
         
 
