@@ -109,6 +109,7 @@ namespace myFirstAppSol.DatabaseLayer
 
         public void updateOwnedAvatars(string email,List<string> avatars)
         {
+            Console.WriteLine("we must update the avatars to" + avatars.ToArray().ToString());
             DBF.Update(tableName,ColOwnedAvatars,avatars.ToArray(),ColEmail,email);
         }
 

@@ -1,4 +1,5 @@
 ﻿using myFirstAppSol.DatabaseLayer;
+using Org.BouncyCastle.Bcpg.OpenPgp;
 
 namespace myFirstAppSol.LogicLayer
 {
@@ -59,6 +60,12 @@ namespace myFirstAppSol.LogicLayer
         }
         //==============================
 
+        public Dictionary<string,int> getStore()
+        {
+            return Avatars.getAvatars(_ownedAvatars);
+        }
+
+
         /// <summary>
         /// purchasing avatar 
         /// </summary>
@@ -72,7 +79,9 @@ namespace myFirstAppSol.LogicLayer
                 int sale= Avatars.AvatarSales[avatar];
                 if(_coins>=sale)
                 {
-                    pdto.OwnedAvatars.Add(avatar);
+                    List<string> list= pdto.OwnedAvatars;
+                    list.Add(avatar);
+                    pdto.OwnedAvatars=list;
                     pdto.Coins = _coins-sale;
                     _coins-=sale;
                     return true;
@@ -100,8 +109,10 @@ namespace myFirstAppSol.LogicLayer
             {
                 if(!count)
                 {
+                    Console.WriteLine("we must to add the amount from profile class");
                     pdto.Coins = _coins + amount;
                     _coins += amount;
+                    Console.WriteLine("the amount mus be added and the db must be persisted");
                 }
             }
         }

@@ -500,7 +500,7 @@ namespace WebApplication2.Controllers
             }
             return Ok(JsonSerializer.Serialize(res));
         }
-        [HttpPost("getRandomMessages")]
+        [HttpPost("getRandomMessage")]
         public IActionResult getRandomMessages([FromForm] string email, [FromForm]string password)
         {
             Response res;
@@ -521,7 +521,7 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
         }
 
-        [HttpPost("getEmailMessage")]
+        [HttpPost("getEmailMessages")]
         public IActionResult getEmailMessages([FromForm] string email, [FromForm] string password)
         {
             Response res;
@@ -621,6 +621,24 @@ namespace WebApplication2.Controllers
             }
             return Ok(JsonSerializer.Serialize(res));
         }
+
+
+        [HttpPost("getStoreAvatars")]
+        public IActionResult postStoreAvatars([FromForm] string email, [FromForm]string password)
+        {
+            Response res;
+            try
+            {
+                checkUser(email, password);
+                res = new Response(Users.UserLogic.getStoreAvatars(email));
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
 
         // ----- mangment 
 

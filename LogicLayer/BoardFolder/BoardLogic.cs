@@ -1,6 +1,7 @@
 ﻿
 
 using WebApplication2.DatabaseLayer;
+using WebApplication2.Singletons;
 
 namespace WebApplication2.LogicLayer.BoardFolder
 {
@@ -108,7 +109,11 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public void moveTask(int corID,int taskId) 
         {
             checkBoard();
-            currBoard.moveTask(corID, taskId);
+            int newSatuts=currBoard.moveTask(corID, taskId);
+            if(newSatuts==3)
+            {
+                Users.UserLogic.addCoins(email, 8);
+            }
         }
         public void editTaskName(int corId,int taskId,int status,string name) 
         {

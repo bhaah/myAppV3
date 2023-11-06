@@ -22,10 +22,13 @@ namespace myFirstAppSol.DatabaseLayer
         {
             get { return _coins; }
             set { 
+                Console.WriteLine("we are in he set coins and the value is :"+value);
                 if(!isPersisted)
                 {
-                    pCon.updateCoins(Email, value);
-                }    
+                    persist();
+                }
+                Console.WriteLine("bedore updaing");
+                pCon.updateCoins(Email, value);
                 _coins = value;
             }
         }
@@ -35,8 +38,10 @@ namespace myFirstAppSol.DatabaseLayer
             set {
                 if (!isPersisted)
                 {
-                    pCon.updateOwnedAvatars(Email, value);
+                    persist();
                 }
+
+                pCon.updateOwnedAvatars(Email, value);
                 _ownedAvatars = value; }
         }
         public string CurrentAvatar
@@ -45,8 +50,9 @@ namespace myFirstAppSol.DatabaseLayer
             set {
                 if (!isPersisted)
                 {
-                    pCon.updateCurrAvatar(Email, value);
+                    persist();
                 }
+                pCon.updateCurrAvatar(Email, value);
                 _currAvatar = value; }
         }
 
@@ -55,9 +61,11 @@ namespace myFirstAppSol.DatabaseLayer
             set {
                 if (!isPersisted)
                 {
-                    pCon.updateAddedDates(Email, value);
+                    persist();
                 }
-                _addDays = value; }
+                pCon.updateAddedDates(Email, value);
+                _addDays = value; 
+            }
         }
 
 

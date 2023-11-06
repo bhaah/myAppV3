@@ -98,6 +98,11 @@ namespace WebApplication2.LogicLayer
             return rec.Profile.setAvatar(avatar);
         }
 
+        public Dictionary<string,int> getStoreAvatars(string email)
+        {
+            User user = GetUser(email);
+            return user.Profile.getStore()
+        }
         
 
     }

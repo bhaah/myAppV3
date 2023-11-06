@@ -97,7 +97,11 @@ namespace WebApplication2.DatabaseLayer
                 connection = new NpgsqlConnection(connectionString);
                 connection.Open();
                 string sqlQuery = $"UPDATE {TableName} SET {colNameToChange} = @ValueToChange WHERE {colPK}= @pkValue";
+                
+                Console.WriteLine(sqlQuery);
                 cmd = new NpgsqlCommand(sqlQuery, connection);
+                cmd.Parameters.AddWithValue("@ValueToChange", valueToChange);
+                cmd.Parameters.AddWithValue("@pkValue", valuePK);
                 cmd.ExecuteNonQuery();
             }
             catch (Exception ex)
