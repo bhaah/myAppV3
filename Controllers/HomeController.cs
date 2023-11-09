@@ -545,7 +545,7 @@ namespace WebApplication2.Controllers
 
         // ----------------------PROFILE
 
-        [HttpGet("userProfile")]
+        [HttpPost("userProfile")]
         public IActionResult getProfile([FromForm] string email, [FromForm] string password)
         {
             Response res;
