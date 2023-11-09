@@ -123,7 +123,7 @@ namespace myFirstAppSol.LogicLayer
         /// <param name="avatar"></param>
         public bool setAvatar(string avatar)
         {
-            if (_ownedAvatars.Contains(avatar))
+            if (_ownedAvatars.Contains(avatar) || avatar == "") 
             {
                 CurrentAvatar= avatar;
                 return true;

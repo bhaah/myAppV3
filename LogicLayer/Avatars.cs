@@ -6,12 +6,14 @@
         {
             {"Bird",89 },
             {"Cat",69 },
-            {"Baby cat",129 },
+            {"BabyCat",129 },
             {"Cheetah",139 },
             {"Elephant",89 },
-            {"Baby leon",149 },
+            {"BabyLeon",149 },
             {"Leon",149 },
-            {"Fish",99 }
+            {"Fish",99 },
+            {"Baby",69 }
+            
         };
 
         public static Dictionary<string,int> getAvatars(List<string> purchased)
