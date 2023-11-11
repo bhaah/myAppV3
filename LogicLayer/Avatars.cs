@@ -18,7 +18,7 @@
 
         public static Dictionary<string,int> getAvatars(List<string> purchased)
         {
-            Dictionary<string, int> toRet = AvatarSales;
+            Dictionary<string, int> toRet = new Dictionary<string, int>( AvatarSales);
             foreach(string avatar in purchased)
             {
                 toRet.Remove(avatar);
