@@ -118,8 +118,16 @@ namespace WebApplication2.Controllers
             try
             {
                 BoardLogic boards = checkUser(email, password);
-                boards.getInBoard(BoardId);
-                res= new Response();
+                
+                Dictionary<int, CornerOfTasks> corners = boards.getInBoard(BoardId); ;
+                List<CornerOfTasks> result = new List<CornerOfTasks>();
+                foreach (CornerOfTasks corner in corners.Values)
+                {
+                    result.Add(corner);
+                    Console.WriteLine($"{corner.Name} with id :{corner.ID}");
+                }
+                res = new Response(result.ToArray());
+                res = new Response();
                 
             }
             catch(Exception ex)
@@ -138,6 +146,7 @@ namespace WebApplication2.Controllers
             {
                 BoardLogic board = checkUser(email,passowd);
                 board.getOutBoard();
+
                 res= new Response();
             }
             catch(Exception ex)

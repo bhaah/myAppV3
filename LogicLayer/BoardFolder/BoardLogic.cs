@@ -41,9 +41,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
             _board.Add(id, newBoard);
             return newBoard;
         }
-        public void getInBoard(int id) 
+        public Dictionary<int, CornerOfTasks> getInBoard(int id) 
         {
             currBoard= _board[id];
+            return currBoard.getAllCorners();
         }
         public void getOutBoard() 
         {

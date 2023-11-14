@@ -5,6 +5,6 @@
     "\\DatabaseLayer",
     "\\LogicLayer"
   ],
-  "SelectedNode": "\\Controllers\\HomeController.cs",
+  "SelectedNode": "\\LogicLayer\\Avatars.cs",
   "PreviewInSolutionExplorer": false
 }
