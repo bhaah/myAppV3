@@ -127,7 +127,7 @@ namespace WebApplication2.Controllers
                     Console.WriteLine($"{corner.Name} with id :{corner.ID}");
                 }
                 res = new Response(result.ToArray());
-                res = new Response();
+                
                 
             }
             catch(Exception ex)
