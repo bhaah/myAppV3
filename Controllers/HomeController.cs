@@ -175,7 +175,7 @@ namespace WebApplication2.Controllers
         //------------- CORNERS
 
         [HttpPost("getCorners")]
-        public IActionResult Get([FromForm] string email, [FromForm] string password)
+        public IActionResult postcor([FromForm] string email, [FromForm] string password)
         {
             Response res;
             
