@@ -174,14 +174,14 @@ namespace WebApplication2.Controllers
 
         //------------- CORNERS
 
-        [HttpGet("getCorners")]
-        public IActionResult Get([FromQuery] UserModel user)
+        [HttpPost("getCorners")]
+        public IActionResult Get([FromForm] string email, [FromForm] string password)
         {
             Response res;
             
             try
             {
-                BoardLogic bl = checkUser(user.Email,user.Password);
+                BoardLogic bl = checkUser(email,password);
                 Dictionary<int, CornerOfTasks> corners = bl.getCorners();
                 List<CornerOfTasks> result = new List<CornerOfTasks>();
                 foreach(CornerOfTasks corner in corners.Values) 
