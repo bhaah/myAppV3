@@ -314,7 +314,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateName")] 
-        public IActionResult PostEditTaskName([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] string newName)
+        public IActionResult PostEditTaskName([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] string Name)
         {
             Response res;
             try
@@ -332,7 +332,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateDesc")]
-        public IActionResult PostEditTaskDesc([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] string desc)
+        public IActionResult PostEditTaskDesc([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] string Desc)
         {
             Response res;
             try
@@ -350,7 +350,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateDeadline")]
-        public IActionResult PostEditTaskDeadline([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] DateTime time)
+        public IActionResult PostEditTaskDeadline([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] DateTime Deadline)
         {
             Response res;
             try
@@ -368,7 +368,7 @@ namespace WebApplication2.Controllers
         }
 
         [HttpPost("UpdateStartTime")]
-        public IActionResult PostEditTaskStartTime([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId,[FromForm] DateTime time ,[FromForm] int status )
+        public IActionResult PostEditTaskStartTime([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId,[FromForm] DateTime StartTime ,[FromForm] int status )
         {
             Response res;
             try
