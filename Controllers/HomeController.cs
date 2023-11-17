@@ -320,7 +320,7 @@ namespace WebApplication2.Controllers
             try
             {
                 BoardLogic bl =checkUser(email, password); 
-                bl.editTaskName(corId,taskId,status,newName);
+                bl.editTaskName(corId,taskId,status,Name);
                 res = new Response();
             }
             catch(Exception ex)
@@ -338,7 +338,7 @@ namespace WebApplication2.Controllers
             try
             {
                 BoardLogic bl = checkUser(email, password);
-                bl.editTaskDesc(corId, taskId, status, desc);
+                bl.editTaskDesc(corId, taskId, status, Desc);
                 res = new Response();
             }
             catch (Exception ex)
@@ -356,7 +356,7 @@ namespace WebApplication2.Controllers
             try
             {
                 BoardLogic bl = checkUser(email, password);
-                bl.editTaskDeadline(corId, taskId, status, time);
+                bl.editTaskDeadline(corId, taskId, status, Deadline);
                 res = new Response();
             }
             catch (Exception ex)
@@ -374,7 +374,7 @@ namespace WebApplication2.Controllers
             try
             {
                 BoardLogic bl = checkUser(email, password);
-                bl.editTaskStartTime(corId, taskId, status, time);
+                bl.editTaskStartTime(corId, taskId, status, StartTime);
                 res = new Response();
             }
             catch (Exception ex)
