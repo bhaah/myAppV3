@@ -319,7 +319,7 @@ namespace WebApplication2.Controllers
             Response res;
             try
             {
-                BoardLogic bl =checkUser(email, password);
+                BoardLogic bl =checkUser(email, password); 
                 bl.editTaskName(corId,taskId,status,newName);
                 res = new Response();
             }
