@@ -152,10 +152,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
             }
             return result;
         }
-        public void addNote(int id,string content) 
+        public Note addNote(int id,string content) 
         {
             checkBoard();
-            currBoard.addNote(id, content);
+            return currBoard.addNote(id, content);
         }
         public void removeNote(int id) 
         {

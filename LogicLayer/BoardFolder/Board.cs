@@ -134,11 +134,12 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             return _notes;
         }
-        public void addNote(int id,string content) 
+        public Note addNote(int id,string content) 
         {
             NoteController nc = new NoteController();
             int Id = nc.getMaxID()+1;
-            _notes.Add(Id,new Note(Id,content,_id));            
+            _notes.Add(Id,new Note(Id,content,_id));         
+            return _notes[Id];
         }
         public void removeNote(int id) 
         {

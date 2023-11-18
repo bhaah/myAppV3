@@ -428,8 +428,8 @@ namespace WebApplication2.Controllers
             try
             {
                 BoardLogic bl = checkUser(email,password);
-                bl.addNote(id,content);
-                res = new Response();
+               
+                res = new Response(bl.addNote(id, content));
 
             }
             catch (Exception ex)
