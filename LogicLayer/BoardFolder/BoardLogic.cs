@@ -171,7 +171,16 @@ namespace WebApplication2.LogicLayer.BoardFolder
 
 
         //celendar
-        public void getAllTasksIn(DateTime start) { }
+        public void getAllTasksIn(DateTime start) 
+        {
+            Dictionary<string, Task[]> toRet = new Dictionary<string, Task[]>();
+
+            foreach(Board b in _board.Values)
+            {
+                toRet.Add("new", b.getNewTasks());
+                toRet.Add("inProgress", b.getInProgressTasks());
+            }
+        }
         public void getAllTasksWithDeadline(DateTime deadline) { }
 
 

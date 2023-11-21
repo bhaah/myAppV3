@@ -6,6 +6,7 @@ using System.Text.Json;
 using WebApplication2.DatabaseLayer;
 using myFirstAppSol.LogicLayer;
 using Microsoft.AspNetCore.Cors;
+using myFirstAppSol;
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace WebApplication2.Controllers
@@ -54,6 +55,18 @@ namespace WebApplication2.Controllers
         }
 
         //-----------------------
+
+
+        [HttpPost("connect")]
+        public IActionResult postConnect([FromForm]string email, [FromForm]string password)
+        {
+            
+            ChatHub c = new ChatHub();
+            c.listen(email);
+            return Ok();
+        }
+
+
 
         // GET api/<HomeController>/5
         [HttpPost("Boards")]

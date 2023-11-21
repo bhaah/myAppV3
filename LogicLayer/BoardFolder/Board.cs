@@ -127,6 +127,22 @@ namespace WebApplication2.LogicLayer.BoardFolder
             _corners[corID].deleteTask(taskId);
         }
 
+        //true - new tasks / false - in progress tasks
+        public Task[] GetCalendarTasks() 
+        {
+            List<myFirstAppSol.LogicLayer.BoardFolder.TaskCalendarModel> tasks = new List<myFirstAppSol.LogicLayer.BoardFolder.TaskCalendarModel>();
+            List<Task> allTasks= new List<Task>();
+            foreach(CornerOfTasks cor in _corners.Values)
+            {
+                allTasks.AddRange(getAllTasksInCor(cor.ID));
+
+            }
+            foreach(Task task in allTasks)
+            {
+                tasks.Add(new myFirstAppSol.LogicLayer.BoardFolder.TaskCalendarModell(task,_id));
+            }
+
+        }
 
         //notes ---------------------------------------
 
