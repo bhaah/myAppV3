@@ -139,7 +139,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             }
             foreach(Task task in allTasks)
             {
-                tasks.Add(new myFirstAppSol.LogicLayer.BoardFolder.TaskCalendarModell(task,_id));
+                tasks.Add(new TaskCalendarModell(task,_id));
             }
 
         }
