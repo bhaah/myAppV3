@@ -1,4 +1,5 @@
-﻿using WebApplication2.DatabaseLayer;
+﻿using myFirstAppSol.LogicLayer.BoardFolder;
+using WebApplication2.DatabaseLayer;
 
 namespace WebApplication2.LogicLayer.BoardFolder
 {
@@ -10,6 +11,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private Dictionary<int,Note> _notes;
         private BoardDTO bdto;
         private CornerController cc = new CornerController();
+        
         
         //cons ------------------------------
         public Board(int id, string name,string email)
@@ -101,7 +103,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             return _corners[CorID].creatTask(name, desc, taskId, dateTime);
         }
-        public int moveTask(int CorID, int taskId)
+        public Task moveTask(int CorID, int taskId)
         {
             return _corners[CorID].moveTask(taskId);
         }
@@ -128,20 +130,24 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
 
         //true - new tasks / false - in progress tasks
-        public Task[] GetCalendarTasks() 
+        public List<TaskCalendarModel> GetCalendarTasks()
         {
-            List<myFirstAppSol.LogicLayer.BoardFolder.TaskCalendarModel> tasks = new List<myFirstAppSol.LogicLayer.BoardFolder.TaskCalendarModel>();
-            List<Task> allTasks= new List<Task>();
-            foreach(CornerOfTasks cor in _corners.Values)
+            List<TaskCalendarModel> tasks = new List<TaskCalendarModel>();
+            List<BoardFolder.Task> allTasks = new List<BoardFolder.Task>();
+            foreach (CornerOfTasks cor in _corners.Values)
             {
                 allTasks.AddRange(getAllTasksInCor(cor.ID));
 
             }
-            foreach(Task task in allTasks)
+            foreach (BoardFolder.Task task in allTasks)
             {
-                tasks.Add(new TaskCalendarModell(task,_id));
+                if (task.Status == 0 || task.Status==2) tasks.Add(new TaskCalendarModel(task,_id));
             }
 
+
+
+            // we want to arrange them => [later,...,earlier]
+            return tasks;
         }
 
         //notes ---------------------------------------

@@ -2,15 +2,21 @@
 {
     public class TaskCalendarModel
     {
-
-        public Task Task { get; set; }
+       
+        public WebApplication2.LogicLayer.BoardFolder.Task Task { get; set; }
         public int BoardId { get; set; }
 
 
-        public TaskCalendarModel(Task task,int boardId) 
+        public TaskCalendarModel(WebApplication2.LogicLayer.BoardFolder.Task task,int boardId) 
         {
             Task= task;
-            BoardId = boardIdl;
+            BoardId = boardId;
+        }
+
+
+        public int compareTo(TaskCalendarModel other)
+        {
+            return DateTime.Compare(Task.TaskFor,other.Task.TaskFor);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 
+using myFirstAppSol.LogicLayer.BoardFolder;
 using WebApplication2.DatabaseLayer;
 using WebApplication2.Singletons;
 
@@ -11,6 +12,8 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private Board currBoard;
         private string email;
         private BoardController bc=new BoardController();
+        private AVLTaskCalendar avl = new AVLTaskCalendar();
+
 
         //constructor
         public BoardLogic(string email)
@@ -22,6 +25,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             {
                 _board.Add(board.Id,new Board(board));
             }
+            InsertTasksInAVL();
         }
 
         
@@ -97,7 +101,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public Task creatTask(int corId,int taskId,string taskName,string taskDesc,DateTime dateTime) 
         {
             checkBoard();
-            return currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
+            Task toRet =  currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
+            avl.Insert(new TaskCalendarModel(toRet, toRet.Id));
+            return toRet;
         }
         public void deleteTask(int boardId,int corId,int taskId) 
         {
@@ -110,10 +116,15 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public void moveTask(int corID,int taskId) 
         {
             checkBoard();
-            int newSatuts=currBoard.moveTask(corID, taskId);
-            if(newSatuts==3)
+            Task moved=currBoard.moveTask(corID, taskId);
+            if(moved.Status==3)
             {
                 Users.UserLogic.addCoins(email, 8,true);
+                Console.WriteLine("coins added to " + email);
+            }
+            if(moved.Status == 2)
+            {
+                avl.Insert(new TaskCalendarModel(moved, currBoard.ID));
             }
         }
         public void editTaskName(int corId,int taskId,int status,string name) 
@@ -171,14 +182,17 @@ namespace WebApplication2.LogicLayer.BoardFolder
 
 
         //celendar
-        public void getAllTasksIn(DateTime start) 
+        public void InsertTasksInAVL() 
         {
-            Dictionary<string, Task[]> toRet = new Dictionary<string, Task[]>();
-
+            
+           
             foreach(Board b in _board.Values)
             {
-                toRet.Add("new", b.getNewTasks());
-                toRet.Add("inProgress", b.getInProgressTasks());
+                List<TaskCalendarModel> tasks = b.GetCalendarTasks();
+                foreach(TaskCalendarModel t in tasks)
+                {
+                    avl.Insert(t);
+                }
             }
         }
         public void getAllTasksWithDeadline(DateTime deadline) { }

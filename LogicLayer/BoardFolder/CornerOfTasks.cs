@@ -92,7 +92,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             _pages[0].addTask(task);
             return task;
         }
-        public int moveTask(int id)
+        public Task moveTask(int id)
         {
             Task toMove = null;
             int pageNum = -1;
@@ -112,7 +112,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
                 _pages[pageNum+1].addTask(toMove);
                 toMove.MoveTask();
             }
-            return toMove.Status;
+            return toMove;
         }
         public void EditName(int id, int status, string name)
         {
