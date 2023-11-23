@@ -97,8 +97,24 @@ namespace WebApplication2.Controllers
             
         }
 
-        
+        //-------------------CALENDAR--------------------
 
+        [HttpPost("calendar")]
+        public IActionResult postCalendar([FromForm] string email, [FromForm]string password)
+        {
+            Response res;
+            try
+            {
+                var boards = checkUser(email, password);
+                res = new Response(boards.Calendar.ToArray());
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+            
+        }
         //--------- BOARDS MANGMENT ---------
 
 

@@ -14,6 +14,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private BoardController bc=new BoardController();
         private AVLTaskCalendar avl = new AVLTaskCalendar();
 
+        public List<TaskCalendarModel> Calendar
+        {
+            get { return avl.Read(); }
+        }
 
         //constructor
         public BoardLogic(string email)
@@ -102,7 +106,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             checkBoard();
             Task toRet =  currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
-            avl.Insert(new TaskCalendarModel(toRet, toRet.Id));
+            //avl.Insert(new TaskCalendarModel(toRet, currBoard.ID);
             return toRet;
         }
         public void deleteTask(int boardId,int corId,int taskId) 
@@ -191,7 +195,8 @@ namespace WebApplication2.LogicLayer.BoardFolder
                 List<TaskCalendarModel> tasks = b.GetCalendarTasks();
                 foreach(TaskCalendarModel t in tasks)
                 {
-                    avl.Insert(t);
+                    Console.WriteLine("is this task " + t.Task.Name + " in the avl tree: " + avl.Search(t));
+                    if(!avl.Search(t)) avl.Insert(t);
                 }
             }
         }

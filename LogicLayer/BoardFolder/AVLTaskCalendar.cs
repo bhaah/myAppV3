@@ -24,11 +24,17 @@
 
         public void Insert(TaskCalendarModel model)
         {
-            if(root == null)
+            Console.WriteLine(model.Task.Name + " =+=+=+=+ task added to the avl tree --------------------+++++++++++++++++++-----------");
+            if (root == null)
             {
                 root = new Node(model, null, null);
             }
-            Insert(root, model);
+            else
+            {
+                Insert(root, model);
+            }
+
+            
         }
 
 
@@ -231,7 +237,10 @@
         }
 
 
-
+        public List<TaskCalendarModel> Read()
+        {
+            return ReadFromMinToMax(root);
+        }
         public List<TaskCalendarModel> ReadFromMinToMax(Node node)
         {
             if (node == null)
@@ -243,7 +252,7 @@
             results.AddRange(ReadFromMinToMax(node.left));
             results.Add(node.value);
             results.AddRange(ReadFromMinToMax(node.right));
-
+            Console.WriteLine(results.Count + " this is the number of the elements in the avl tree ------------");
             return results;
         }
 
