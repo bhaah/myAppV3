@@ -106,7 +106,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             checkBoard();
             Task toRet =  currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
-            //avl.Insert(new TaskCalendarModel(toRet, currBoard.ID);
+            avl.Insert(new TaskCalendarModel(toRet, currBoard.ID));
             return toRet;
         }
         public void deleteTask(int boardId,int corId,int taskId) 
