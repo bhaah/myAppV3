@@ -41,8 +41,9 @@
 
         private void Insert(Node node, TaskCalendarModel model)
         {
-            if (node.value.compareTo(model) > 0)
+            if (node.value.compareTo(model) > 0) //this later than model:=>
             {
+                Console.WriteLine("we want to insert " + model.Task.Name + " to the left side node is:" + node.value.Task.Name);
                 if (node.left == null) {
                     node.left = new Node(model,null,null);
                     UpdateBalance(node);
@@ -50,11 +51,12 @@
                 else
                 {
                     Insert(node.left, model);
-                    
+                    UpdateBalance(node);
                 }
             }
             else
             {
+                Console.WriteLine("we want to insert " + model.Task.Name + " to the Right side node is:"+node.value.Task.Name);
                 if (node.right == null)
                 {
                     node.right = new Node(model, null, null);
@@ -63,7 +65,7 @@
                 else
                 {
                     Insert(node.right, model);
-                    
+                    UpdateBalance(node);
                 }
             }
         }
@@ -107,16 +109,24 @@
             Node leftChild = node.left;
             node.left = leftChild.right;
             leftChild.right = node;
-
-            UpdateBalance(node);
-            UpdateBalance(leftChild);
+            if (node == root)
+            {
+                root = leftChild;
+            }
+            
         }
 
         private void RightLeftRotate(Node node)
         {
             Console.WriteLine("RL");
-            LeftRotate(node.right);
+            
+            Node y = node.left;
+            Node z = y.right;
+            y.right = z.left;
+            z.left = y;
+            node.left = z;
             RightRotate(node);
+
         }
 
         private void LeftRotate(Node node)
@@ -125,16 +135,25 @@
             Node rightChild = node.right;
             node.right = rightChild.left;
             rightChild.left = node;
-
-            UpdateBalance(node);
-            UpdateBalance(rightChild);
+            if (node == root)
+            {
+                root = rightChild;
+            }
+            
         }
 
         private void LeftRightRotate(Node node)
         {
             Console.WriteLine("LR");
-            RightRotate(node.left);
+            Node y = node.right;
+            Node z = y.left;
+            y.left = z.right;
+            node.right = z;
+            z.right = y;
             LeftRotate(node);
+
+
+
         }
 
         private int GetBalanceFactor(Node node)
