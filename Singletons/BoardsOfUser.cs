@@ -14,7 +14,9 @@ namespace WebApplication2.Singletons
                 List<User> users = Users.UserLogic.Users;
                 foreach(User user in users)
                 {
+                    Console.WriteLine("RAM:we must add this user * " + user.Email + " * to the RAM");
                     userBoards.Add(user.Email,new BoardLogic(user.Email));
+                    Console.WriteLine("+ "+user.Email+" addd to RAM");
                 }
             }
             if(!userBoards.ContainsKey(email))

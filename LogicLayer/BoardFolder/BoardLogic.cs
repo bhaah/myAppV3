@@ -196,7 +196,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
                 foreach(TaskCalendarModel t in tasks)
                 {
                     Console.WriteLine("is this task " + t.Task.Name + " in the avl tree: " + avl.Search(t));
-                    if(!avl.Search(t)) avl.Insert(t);
+                    avl.Insert(t);
                 }
             }
         }

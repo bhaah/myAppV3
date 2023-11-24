@@ -24,17 +24,18 @@
 
         public void Insert(TaskCalendarModel model)
         {
-            Console.WriteLine(model.Task.Name + " =+=+=+=+ task added to the avl tree --------------------+++++++++++++++++++-----------");
+            Console.WriteLine(model.Task.Name + " =+=+=+=+ task addING to the avl tree --------------------+++++++++++++++++++-----------");
             if (root == null)
             {
+                Console.WriteLine("One root =>");
                 root = new Node(model, null, null);
             }
             else
             {
                 Insert(root, model);
             }
+            Console.WriteLine(model.Task.Name + " =+=+=+=+ task added to the avl tree --------------------+++++++++++++++++++-----------");
 
-            
         }
 
 
@@ -49,6 +50,7 @@
                 else
                 {
                     Insert(node.left, model);
+                    
                 }
             }
             else
@@ -61,6 +63,7 @@
                 else
                 {
                     Insert(node.right, model);
+                    
                 }
             }
         }
@@ -70,25 +73,29 @@
         {
             int balanceFactor = GetBalanceFactor(node);
 
-            if (balanceFactor > 1)
+            if (balanceFactor < -1)
             {
-                if (GetBalanceFactor(node.right) > 0)
+                if (GetBalanceFactor(node.left) < 0)
                 {
+                    Console.WriteLine("RR");
                     RightRotate(node);
                 }
                 else
                 {
+                    Console.WriteLine("RL");
                     RightLeftRotate(node);
                 }
             }
-            else if (balanceFactor < -1)
+            else if (balanceFactor > 1)
             {
-                if (GetBalanceFactor(node.left) < 0)
+                if (GetBalanceFactor(node.right) > 0)
                 {
+                    Console.WriteLine("LL");
                     LeftRotate(node);
                 }
                 else
                 {
+                    Console.WriteLine("LR");
                     LeftRightRotate(node);
                 }
             }
@@ -96,6 +103,7 @@
 
         private void RightRotate(Node node)
         {
+            Console.WriteLine("RR");
             Node leftChild = node.left;
             node.left = leftChild.right;
             leftChild.right = node;
@@ -106,12 +114,14 @@
 
         private void RightLeftRotate(Node node)
         {
+            Console.WriteLine("RL");
             LeftRotate(node.right);
             RightRotate(node);
         }
 
         private void LeftRotate(Node node)
         {
+            Console.WriteLine("LL");
             Node rightChild = node.right;
             node.right = rightChild.left;
             rightChild.left = node;
@@ -122,6 +132,7 @@
 
         private void LeftRightRotate(Node node)
         {
+            Console.WriteLine("LR");
             RightRotate(node.left);
             LeftRotate(node);
         }
