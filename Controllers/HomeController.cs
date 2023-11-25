@@ -115,6 +115,30 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
             
         }
+
+
+        [HttpPost("deleteCalendarTask")]
+        public IActionResult postDelete([FromForm] string email, [FromForm]string password, [FromForm] int boardId, [FromForm]int corId, [FromForm] int taskId)
+        {
+            Response res;
+            try
+            {
+                BoardLogic bl =checkUser(email, password);
+                res = new Response(bl.deleteFromAvl(boardId,corId,taskId));
+            }
+            catch(Exception ex)
+            {
+                res = new Response(ex.Message);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+        
+
+     
+
+
+
+
         //--------- BOARDS MANGMENT ---------
 
 

@@ -150,6 +150,16 @@ namespace WebApplication2.LogicLayer.BoardFolder
             return tasks;
         }
 
+
+
+        public Task getTask(int corId,int taskId)
+        {
+            List<Task> tasks = _corners[corId].getTasks();
+            foreach(Task task in tasks)
+            {
+                if(task.Id== taskId) return task;
+            }
+        }
         //notes ---------------------------------------
 
         public Dictionary<int,Note> getAllNotes() 

@@ -19,6 +19,22 @@ namespace WebApplication2.LogicLayer.BoardFolder
             get { return avl.Read(); }
         }
 
+
+
+
+
+        //
+
+
+        public Node deleteFromAvl(int boardId, int corId,int taskId)
+        {
+            Task t = _board[boardId].getTask(corId,taskId);
+            TaskCalendarModel tcm = new TaskCalendarModel(t,boardId);
+            return avl.delete(tcm);
+        }
+
+
+
         //constructor
         public BoardLogic(string email)
         {

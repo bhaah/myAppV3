@@ -333,6 +333,8 @@
             }
             else
             {
+
+                //found the node
                 if (node.left == null && node.right == null)
                 {
                     node = null;
