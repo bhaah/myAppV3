@@ -68,10 +68,11 @@ namespace WebApplication2.LogicLayer.BoardFolder
             if (!_tasks.ContainsKey(id)) { throw new ArgumentException("in this page there is no task id :" + id); }
             _tasks[id].Description = desc;
         }
-        public void EditDeadline(int id, DateTime dateTime) 
+        public Task EditDeadline(int id, DateTime dateTime) 
         {
             if (!_tasks.ContainsKey(id)) { throw new ArgumentException("in this page there is no task id :" + id); }
             _tasks[id].TaskFor=dateTime;
+            return _tasks[id];
         }
         public void removeDeadline(int id) {
             if (!_tasks.ContainsKey(id)) { throw new ArgumentException("in this page there is no task id :" + id); }

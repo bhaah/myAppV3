@@ -128,7 +128,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
             }
             if(moved.Status == 2)
             {
-                avl.Insert(new TaskCalendarModel(moved, currBoard.ID));
+                TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID);
+                avl.delete(TCM);
+                avl.Insert(TCM);
             }
         }
         public void editTaskName(int corId,int taskId,int status,string name) 
@@ -144,7 +146,12 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public void editTaskDeadline(int corId,int taskId,int status,DateTime dateTime) 
         {
             checkBoard();
-            currBoard.editDeadline(corId, taskId, status, dateTime);
+            Task t=currBoard.editDeadline(corId, taskId, status, dateTime);
+            TaskCalendarModel tcm = new TaskCalendarModel(t, currBoard.ID);
+            if(avl.delete(tcm)!=null)
+            avl.Insert(tcm);
+
+
         }
         public void editTaskStartTime(int corId,int taskId,int status,DateTime dateTime) 
         {

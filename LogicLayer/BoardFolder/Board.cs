@@ -115,9 +115,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             _corners[corId].EditDesc(taskId, status, desc);
         }
-        public void editDeadline(int corId, int taskID, int status, DateTime dateTime)
+        public Task  editDeadline(int corId, int taskID, int status, DateTime dateTime)
         {
-            _corners[corId].EditDeadline(taskID, status, dateTime);
+            return _corners[corId].EditDeadline(taskID, status, dateTime);
         }
         public void removeDeadline() { }
         public void setTimeTodo(int corId, int taskId, int status, DateTime dateTime)

@@ -122,9 +122,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             _pages[status].EditDesc(id, desc);
         }
-        public void EditDeadline(int id, int status, DateTime dateTime)
+        public Task EditDeadline(int id, int status, DateTime dateTime)
         {
-            _pages[status].EditDeadline(id, dateTime);
+            return _pages[status].EditDeadline(id, dateTime);
         }
         public void removeDeadline()
         {

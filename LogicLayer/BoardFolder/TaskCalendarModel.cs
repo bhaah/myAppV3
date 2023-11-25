@@ -16,7 +16,13 @@
 
         public int compareTo(TaskCalendarModel other)
         {
-            return DateTime.Compare(Task.TaskFor,other.Task.TaskFor);
+            int toRet = DateTime.Compare(Task.TaskFor,other.Task.TaskFor);
+            if (toRet == 0 )
+            {
+                if(other.Task.Id == Task.Id) return 0;
+                else return -1;
+            }
+            else return toRet;
         }
     }
 }

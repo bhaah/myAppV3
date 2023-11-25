@@ -5,13 +5,14 @@
         internal TaskCalendarModel value;
         internal Node left; 
         internal Node right;
+        internal Node father;
+        
 
 
-        public Node(TaskCalendarModel value, Node left, Node right)
+        public Node(TaskCalendarModel value, Node father)
         {
             this.value = value;
-            this.left = left;
-            this.right = right;
+            this.father = father;
         }
 
     }
@@ -28,7 +29,7 @@
             if (root == null)
             {
                 Console.WriteLine("One root =>");
-                root = new Node(model, null, null);
+                root = new Node(model, null);
             }
             else
             {
@@ -45,12 +46,13 @@
             {
                 Console.WriteLine("we want to insert " + model.Task.Name + " to the left side node is:" + node.value.Task.Name);
                 if (node.left == null) {
-                    node.left = new Node(model,null,null);
-                    UpdateBalance(node);
+                    node.left = new Node(model,node);
+                    
                 }
                 else
                 {
                     Insert(node.left, model);
+                    printNode(node);
                     UpdateBalance(node);
                 }
             }
@@ -59,12 +61,13 @@
                 Console.WriteLine("we want to insert " + model.Task.Name + " to the Right side node is:"+node.value.Task.Name);
                 if (node.right == null)
                 {
-                    node.right = new Node(model, null, null);
-                    UpdateBalance(node);
+                    node.right = new Node(model, node);
+                    
                 }
                 else
                 {
                     Insert(node.right, model);
+                    printNode(node);
                     UpdateBalance(node);
                 }
             }
@@ -79,12 +82,13 @@
             {
                 if (GetBalanceFactor(node.left) < 0)
                 {
-                    Console.WriteLine("RR");
+                    Console.WriteLine("RR # "+node.value.Task.Name+" #");
                     RightRotate(node);
+                    Console.WriteLine("RR # " + node.value.Task.Name + " #DONE");
                 }
                 else
                 {
-                    Console.WriteLine("RL");
+                    Console.WriteLine("RL # " + node.value.Task.Name + " #");
                     RightLeftRotate(node);
                 }
             }
@@ -92,12 +96,12 @@
             {
                 if (GetBalanceFactor(node.right) > 0)
                 {
-                    Console.WriteLine("LL");
+                    Console.WriteLine("LL # " + node.value.Task.Name + " #");
                     LeftRotate(node);
                 }
                 else
                 {
-                    Console.WriteLine("LR");
+                    Console.WriteLine("LR # "+node.value.Task.Name+" #");
                     LeftRightRotate(node);
                 }
             }
@@ -107,13 +111,58 @@
         {
             Console.WriteLine("RR");
             Node leftChild = node.left;
+            printNode(node);
+            printNode(leftChild);
+            //to move y subtree to node (right y data => left x data)
+            
+            
+            if (leftChild.right != null)
+            {
+                leftChild.right.father = node;
+            }
             node.left = leftChild.right;
+            //after moving right y data we want to set the right side is x
             leftChild.right = node;
+
+            //update father of y
             if (node == root)
             {
                 root = leftChild;
+                leftChild.father = null;
             }
-            
+            else
+            {
+                leftChild.father = node.father;
+                //updating left side of father
+                if(node.father.left==node) node.father.left = leftChild;
+                else node.father.right = leftChild;
+            }
+            node.father = leftChild;
+            Console.WriteLine("<<<<<<<<<<<< AFTER RR >>>>>>>>>>>>>>>>");
+            printNode(node);
+            printNode(leftChild);
+            printNode(node.right);
+            printNode(leftChild.right);
+            printNode(node.left);
+            printNode(leftChild.left);
+            Console.WriteLine("<<<<<<<<<<<<>>>>>>>>>>>>>>>>");
+        }
+
+
+        private void printNode(Node node)
+        {
+            if (node != null)
+            {
+                Console.WriteLine($"{getNode(node)}:" + getNode(node));
+                Console.WriteLine("    left:" + getNode(node.left) + "  Father:" + getNode(node.father) + "    right:" + getNode(node.right));
+
+            }
+
+        }
+        private string getNode(Node node)
+        {
+            if (node == null) return "null";
+            else return node.value.Task.Name;
         }
 
         private void RightLeftRotate(Node node)
@@ -122,9 +171,14 @@
             
             Node y = node.left;
             Node z = y.right;
-            y.right = z.left;
-            z.left = y;
+            z.father= node;
             node.left = z;
+            y.father= node;
+            y.right = z.left;
+            //y.right = z.left;
+            z.left = y;
+            //node.left = z;
+            
             RightRotate(node);
 
         }
@@ -133,13 +187,44 @@
         {
             Console.WriteLine("LL");
             Node rightChild = node.right;
+            printNode(node);
+            printNode(rightChild);
+            //to move y subtree to node (right y data => left x data)
+            if (rightChild.left != null)
+            {
+                rightChild.left.father = node;
+                
+            }
             node.right = rightChild.left;
+
+
+            //after moving right y data we want to set the right side is x
             rightChild.left = node;
+            
+            //update father of y
             if (node == root)
             {
                 root = rightChild;
+                rightChild.father= null;
             }
-            
+            else
+            {
+                rightChild.father = node.father;
+                //updating left side of father
+                if(node.father.left == node) node.father.left = rightChild;
+                else node.father.right = rightChild;
+                
+            }
+            node.father = rightChild;
+            Console.WriteLine("<<<<<<<<<<<< AFTER LL >>>>>>>>>>>>>>>>");
+            printNode(node);
+            printNode(rightChild);
+            printNode(node.left);
+            printNode(rightChild.left);
+            printNode(node.right);
+            printNode(rightChild.right);
+            Console.WriteLine("<<<<<<<<<<<<>>>>>>>>>>>>>>>>");
+
         }
 
         private void LeftRightRotate(Node node)
@@ -147,9 +232,16 @@
             Console.WriteLine("LR");
             Node y = node.right;
             Node z = y.left;
-            y.left = z.right;
+            z.father= node;
             node.right = z;
-            z.right = y;
+            y.father= z;
+            y.left= z.right;
+            z.right= y;
+
+            //y.left = z.right;
+            //node.right = z;
+            //z.right = y;
+            
             LeftRotate(node);
 
 
@@ -168,14 +260,24 @@
 
             return rightHeight - leftHeight;
         }
-
+        private int counter = 0;
 
 
         private int GetHeight(Node node)
         {
+
             if (node == null) return 0;
-            int leftHeight = GetHeight(node.left);
-            int rightHeight = GetHeight(node.right);
+            //Console.WriteLine("get height of " + node.value.Task.Name);
+            if (counter < 100)
+            {
+                printNode(node);
+                counter++;
+            }
+            int leftHeight=0;
+            int rightHeight = 0;
+            if (node.left != null) leftHeight = GetHeight(node.left);
+            
+            if (node.right != null) rightHeight = GetHeight(node.right);
 
             return Math.Max(leftHeight, rightHeight) + 1;
         }
@@ -206,6 +308,11 @@
             {
                 return true;
             }
+        }
+
+        public Node delete(TaskCalendarModel value)
+        {
+            return Delete(root, value);
         }
 
 
