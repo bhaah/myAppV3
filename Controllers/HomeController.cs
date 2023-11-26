@@ -366,6 +366,23 @@ namespace WebApplication2.Controllers
             return Ok(JsonSerializer.Serialize(res));
         }
 
+        [HttpPost("moveTaskFromCalendar")]
+        public IActionResult PostMoveTask([FromForm] string email, [FromForm] string password, [FromForm]int boardId,[FromForm] int corId, [FromForm] int taskId)
+        {
+            Response res;
+            try
+            {
+                BoardLogic bl = checkUser(email, password);
+                bl.moveTaskFromOut(boardId,corId, taskId);
+                res = new Response();
+            }
+            catch (Exception ex)
+            {
+                res = new Response("error in moving task.\n" + ex.Message, null);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
         [HttpPost("UpdateName")] 
         public IActionResult PostEditTaskName([FromForm] string email, [FromForm] string password, [FromForm] int corId, [FromForm] int taskId, [FromForm] int status, [FromForm] string Name)
         {

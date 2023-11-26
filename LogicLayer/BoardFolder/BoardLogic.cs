@@ -2,6 +2,7 @@
 
 using myFirstAppSol.LogicLayer.BoardFolder;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 using WebApplication2.DatabaseLayer;
 using WebApplication2.Singletons;
 
@@ -12,7 +13,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         private Dictionary<int, Board> _board;
         private Board currBoard;
         private string email;
-        private BoardController bc=new BoardController();
+        private BoardController bc = new BoardController();
         private AVLTaskCalendar avl = new AVLTaskCalendar();
 
         public List<TaskCalendarModel> Calendar
@@ -27,13 +28,13 @@ namespace WebApplication2.LogicLayer.BoardFolder
         //
 
 
-        public Node deleteFromAvl(int boardId, int corId,int taskId)
+        public Node deleteFromAvl(int boardId, int corId, int taskId)
         {
             Console.WriteLine("we entered the delete taskcalendar in boardLogic");
-            Task t = _board[boardId].getTask(corId,taskId);
-            TaskCalendarModel tcm = new TaskCalendarModel(t,boardId,corId);
+            Task t = _board[boardId].getTask(corId, taskId);
+            TaskCalendarModel tcm = new TaskCalendarModel(t, boardId, corId);
             string json = JsonConvert.SerializeObject(tcm);
-            Console.WriteLine("so we must delete this task :" + json+ " from avl");
+            Console.WriteLine("so we must delete this task :" + json + " from avl");
             return avl.delete(tcm);
         }
 
@@ -47,12 +48,12 @@ namespace WebApplication2.LogicLayer.BoardFolder
             _board = new Dictionary<int, Board>();
             foreach (BoardDTO board in boards)
             {
-                _board.Add(board.Id,new Board(board));
+                _board.Add(board.Id, new Board(board));
             }
             InsertTasksInAVL();
         }
 
-        
+
 
         // geters for model
 
@@ -62,23 +63,23 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
 
         // controling the boards list
-        public Board creatBoard(string name) 
+        public Board creatBoard(string name)
         {
             int id = bc.getMaxID() + 1;
-            Board newBoard = new Board(id, name,email);
+            Board newBoard = new Board(id, name, email);
             _board.Add(id, newBoard);
             return newBoard;
         }
-        public Dictionary<int, CornerOfTasks> getInBoard(int id) 
+        public Dictionary<int, CornerOfTasks> getInBoard(int id)
         {
-            currBoard= _board[id];
+            currBoard = _board[id];
             return currBoard.getAllCorners();
         }
-        public void getOutBoard() 
+        public void getOutBoard()
         {
             currBoard = null;
         }
-        public void deleteBoard(int id) 
+        public void deleteBoard(int id)
         {
             _board[id].deleteBoard();
             _board.Remove(id);
@@ -87,27 +88,27 @@ namespace WebApplication2.LogicLayer.BoardFolder
 
         // controlling the corners
 
-        public Dictionary<int,CornerOfTasks> getCorners()
+        public Dictionary<int, CornerOfTasks> getCorners()
         {
             checkBoard();
             return currBoard.getAllCorners();
         }
-        public void creatCorner(int idCor,string name,string desc) 
+        public void creatCorner(int idCor, string name, string desc)
         {
             checkBoard();
-            currBoard.addCorner(name,desc);
+            currBoard.addCorner(name, desc);
         }
-        public void deleteCorner(int id) 
+        public void deleteCorner(int id)
         {
             checkBoard();
             currBoard.removeCorner(id);
         }
-        public int getCornerProgress(int id) 
+        public int getCornerProgress(int id)
         {
             checkBoard();
             return currBoard.getCornerProgress(id);
         }
-        public List<Task> getCornerTasks(int id) 
+        public List<Task> getCornerTasks(int id)
         {
             checkBoard();
             return currBoard.getAllTasksInCor(id);
@@ -120,29 +121,29 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             if (currBoard == null) { throw new ArgumentException("choose a board"); }
         }
-        
+
         //tasks:
-        public Task creatTask(int corId,int taskId,string taskName,string taskDesc,DateTime dateTime) 
+        public Task creatTask(int corId, int taskId, string taskName, string taskDesc, DateTime dateTime)
         {
             checkBoard();
-            Task toRet =  currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
-            avl.Insert(new TaskCalendarModel(toRet, currBoard.ID,corId));
+            Task toRet = currBoard.creatTask(corId, taskId, taskName, taskDesc, dateTime);
+            avl.Insert(new TaskCalendarModel(toRet, currBoard.ID, corId));
             return toRet;
         }
-        public void deleteTask(int boardId,int corId,int taskId) 
+        public void deleteTask(int boardId, int corId, int taskId)
         {
             checkBoard();
-            if(currBoard.ID==boardId)
+            if (currBoard.ID == boardId)
             {
-                currBoard.deleteTask(corId,taskId);
-                deleteFromAvl(currBoard.ID,corId,taskId);
+                currBoard.deleteTask(corId, taskId);
+                deleteFromAvl(currBoard.ID, corId, taskId);
             }
         }
-        public void moveTask(int corID,int taskId) 
+        public void moveTask(int corID, int taskId)
         {
             checkBoard();
-            Task moved=currBoard.moveTask(corID, taskId);
-            TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID,corID);
+            Task moved = currBoard.moveTask(corID, taskId);
+            TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID, corID);
             avl.delete(TCM);
             switch (TCM.Task.Status)
             {
@@ -162,9 +163,34 @@ namespace WebApplication2.LogicLayer.BoardFolder
                     break;
 
             }
-
-
         }
+
+        public void moveTaskFromOut(int boardId,int corId,int taskId) {
+            Board board = _board[boardId];
+            Task moved = board.moveTask(corId, taskId);
+            TaskCalendarModel TCM = new TaskCalendarModel(moved, board.ID, corId);
+            avl.delete(TCM);
+            switch (TCM.Task.Status)
+            {
+                case 0:
+                    avl.Insert(TCM);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    avl.Insert(TCM);
+                    break;
+                case 3:
+                    Users.UserLogic.addCoins(email, 8, true);
+                    Console.WriteLine("coins added to " + email);
+                    break;
+                default:
+                    break;
+
+            }
+        }
+
+
         public void editTaskName(int corId,int taskId,int status,string name) 
         {
             checkBoard();
