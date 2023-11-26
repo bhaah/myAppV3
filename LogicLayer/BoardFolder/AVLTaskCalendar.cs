@@ -345,8 +345,9 @@
                 {
 
 
-                    if (node.right != null) { node.value = node.right.value; node.right = null; }
-                    else node = null;
+                    node.value = node.right.value;
+                    node.right = null; 
+                    
                     Console.WriteLine("delete tsatsa");
                 }
                 else if (node.right == null)
