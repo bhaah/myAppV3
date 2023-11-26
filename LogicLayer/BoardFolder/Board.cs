@@ -157,6 +157,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             List<Task> tasks = _corners[corId].getTasks();
             foreach(Task task in tasks)
             {
+                Console.WriteLine(task.Id);
                 if(task.Id== taskId) return task;
             }
             return null;

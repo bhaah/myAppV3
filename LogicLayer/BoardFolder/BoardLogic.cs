@@ -1,6 +1,7 @@
 ﻿
 
 using myFirstAppSol.LogicLayer.BoardFolder;
+using Newtonsoft.Json;
 using WebApplication2.DatabaseLayer;
 using WebApplication2.Singletons;
 
@@ -28,8 +29,11 @@ namespace WebApplication2.LogicLayer.BoardFolder
 
         public Node deleteFromAvl(int boardId, int corId,int taskId)
         {
+            Console.WriteLine("we entered the delete taskcalendar in boardLogic");
             Task t = _board[boardId].getTask(corId,taskId);
             TaskCalendarModel tcm = new TaskCalendarModel(t,boardId);
+            string json = JsonConvert.SerializeObject(tcm);
+            Console.WriteLine("so we must delete this task :" + json+ " from avl");
             return avl.delete(tcm);
         }
 
