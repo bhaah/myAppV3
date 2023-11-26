@@ -135,23 +135,35 @@ namespace WebApplication2.LogicLayer.BoardFolder
             if(currBoard.ID==boardId)
             {
                 currBoard.deleteTask(corId,taskId);
+                deleteFromAvl(currBoard.ID,corId,taskId);
             }
         }
         public void moveTask(int corID,int taskId) 
         {
             checkBoard();
             Task moved=currBoard.moveTask(corID, taskId);
-            if(moved.Status==3)
+            TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID);
+            avl.delete(TCM);
+            switch (TCM.Task.Status)
             {
-                Users.UserLogic.addCoins(email, 8,true);
-                Console.WriteLine("coins added to " + email);
+                case 0:
+                    avl.Insert(TCM);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    avl.Insert(TCM);
+                    break;
+                case 3:
+                    Users.UserLogic.addCoins(email, 8, true);
+                    Console.WriteLine("coins added to " + email);
+                    break;
+                default:
+                    break;
+
             }
-            if(moved.Status == 2)
-            {
-                TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID);
-                avl.delete(TCM);
-                avl.Insert(TCM);
-            }
+
+
         }
         public void editTaskName(int corId,int taskId,int status,string name) 
         {
