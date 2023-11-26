@@ -140,6 +140,11 @@ namespace myFirstAppSol.LogicLayer
         // private fun's ================
         private bool checkAddOption()
         {
+            if(_addDay==null || _addDay.Count<3)
+            {
+                _addDay.Add(DateTime.Now);
+                return true;
+            }
             if(_addDay != null && _addDay.Count > 2 && checkLastThree())
             {
                 return true;
