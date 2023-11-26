@@ -332,38 +332,50 @@
             {
                 node.right = Delete(node.right, value);
             }
-            else
+            else if(value.compareTo(node.value) == 0 )
             {
-
-                //found the node
-                if (node.left == null && node.right == null)
+                if(value.Task.Id != node.value.Task.Id)
                 {
-                    node = null;
-                    Console.WriteLine("delete tsatsa");
-                }
-                else if (node.left == null)
-                {
-
-
-                    node.value = node.right.value;
-                    node.right = null; 
-                    
-                    Console.WriteLine("delete tsatsa");
-                }
-                else if (node.right == null)
-                {
-                    node.value = node.left.value;
-                    node.left = null;
-                    Console.WriteLine("delete tsatsa");
+                    if(node.left!=null && node.left.value.compareTo(value) == 0)
+                    {
+                       node.left = Delete(node.left, value);
+                    }
+                    else if(node.right!=null && node.right.value.compareTo(value)==0) node.right = Delete(node.right, value);
                 }
                 else
                 {
-                    Node successor = FindMin(node.right);
-                    node.value = successor.value;
-                    node.right = Delete(node.right, successor.value);
-                    Console.WriteLine("deleted success");
+                    //found the node
+                    if (node.left == null && node.right == null)
+                    {
+                        node = null;
+                        Console.WriteLine("delete tsatsa");
+                    }
+                    else if (node.left == null)
+                    {
+
+
+                        node.value = node.right.value;
+                        node.right = null;
+
+                        Console.WriteLine("delete tsatsa");
+                    }
+                    else if (node.right == null)
+                    {
+                        node.value = node.left.value;
+                        node.left = null;
+                        Console.WriteLine("delete tsatsa");
+                    }
+                    else
+                    {
+                        Node successor = FindMin(node.right);
+                        node.value = successor.value;
+                        node.right = Delete(node.right, successor.value);
+                        Console.WriteLine("deleted success");
+                    }
                 }
+                
             }
+            
 
             if (node != null)
             {
