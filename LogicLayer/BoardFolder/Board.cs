@@ -1,4 +1,5 @@
 ﻿using myFirstAppSol.LogicLayer.BoardFolder;
+using System.Threading.Tasks;
 using WebApplication2.DatabaseLayer;
 
 namespace WebApplication2.LogicLayer.BoardFolder
@@ -136,13 +137,18 @@ namespace WebApplication2.LogicLayer.BoardFolder
             List<BoardFolder.Task> allTasks = new List<BoardFolder.Task>();
             foreach (CornerOfTasks cor in _corners.Values)
             {
-                allTasks.AddRange(getAllTasksInCor(cor.ID));
+                List<Task> tasksInCor= getAllTasksInCor(cor.ID);
+                //allTasks.AddRange(getAllTasksInCor(cor.ID));
+                foreach(Task t in tasksInCor)
+                {
+                    if (t.Status == 0 || t.Status == 2) tasks.Add(new TaskCalendarModel(t, _id,cor.ID));
+                }
 
             }
-            foreach (BoardFolder.Task task in allTasks)
-            {
-                if (task.Status == 0 || task.Status==2) tasks.Add(new TaskCalendarModel(task,_id));
-            }
+            //foreach (BoardFolder.Task task in allTasks)
+            //{
+            //    if (task.Status == 0 || task.Status==2) tasks.Add(new TaskCalendarModel(task,_id));
+            //}
 
 
 

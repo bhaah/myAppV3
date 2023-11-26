@@ -31,7 +31,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             Console.WriteLine("we entered the delete taskcalendar in boardLogic");
             Task t = _board[boardId].getTask(corId,taskId);
-            TaskCalendarModel tcm = new TaskCalendarModel(t,boardId);
+            TaskCalendarModel tcm = new TaskCalendarModel(t,boardId,corId);
             string json = JsonConvert.SerializeObject(tcm);
             Console.WriteLine("so we must delete this task :" + json+ " from avl");
             return avl.delete(tcm);
@@ -126,7 +126,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             checkBoard();
             Task toRet =  currBoard.creatTask(corId,taskId,taskName,taskDesc,dateTime);
-            avl.Insert(new TaskCalendarModel(toRet, currBoard.ID));
+            avl.Insert(new TaskCalendarModel(toRet, currBoard.ID,corId));
             return toRet;
         }
         public void deleteTask(int boardId,int corId,int taskId) 
@@ -142,7 +142,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             checkBoard();
             Task moved=currBoard.moveTask(corID, taskId);
-            TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID);
+            TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID,corID);
             avl.delete(TCM);
             switch (TCM.Task.Status)
             {
@@ -181,7 +181,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             deleteFromAvl(currBoard.ID, corId, taskId);
             Task t=currBoard.editDeadline(corId, taskId, status, dateTime);
            
-            avl.Insert(new TaskCalendarModel(t,currBoard.ID));
+            avl.Insert(new TaskCalendarModel(t,currBoard.ID,corId));
 
 
         }

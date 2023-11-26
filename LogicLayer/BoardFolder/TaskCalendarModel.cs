@@ -5,12 +5,13 @@
        
         public WebApplication2.LogicLayer.BoardFolder.Task Task { get; set; }
         public int BoardId { get; set; }
+        public int CorId { get; set; }
 
-
-        public TaskCalendarModel(WebApplication2.LogicLayer.BoardFolder.Task task,int boardId) 
+        public TaskCalendarModel(WebApplication2.LogicLayer.BoardFolder.Task task,int boardId,int corId) 
         {
             Task= task;
             BoardId = boardId;
+            CorId = corId;
         }
 
 
