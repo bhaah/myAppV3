@@ -166,10 +166,10 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public void editTaskDeadline(int corId,int taskId,int status,DateTime dateTime) 
         {
             checkBoard();
+            deleteFromAvl(currBoard.ID, corId, taskId);
             Task t=currBoard.editDeadline(corId, taskId, status, dateTime);
-            TaskCalendarModel tcm = new TaskCalendarModel(t, currBoard.ID);
-            if(avl.delete(tcm)!=null)
-            avl.Insert(tcm);
+           
+            avl.Insert(new TaskCalendarModel(t,currBoard.ID));
 
 
         }
