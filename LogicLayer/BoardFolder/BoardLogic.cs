@@ -144,7 +144,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             checkBoard();
             Task moved = currBoard.moveTask(corID, taskId);
             TaskCalendarModel TCM = new TaskCalendarModel(moved, currBoard.ID, corID);
-            avl.delete(TCM);
+            deleteFromAvl(currBoard.ID, corID, taskId);
             switch (TCM.Task.Status)
             {
                 case 0:
@@ -169,7 +169,8 @@ namespace WebApplication2.LogicLayer.BoardFolder
             Board board = _board[boardId];
             Task moved = board.moveTask(corId, taskId);
             TaskCalendarModel TCM = new TaskCalendarModel(moved, board.ID, corId);
-            avl.delete(TCM);
+            
+            deleteFromAvl(boardId, corId, taskId);
             switch (TCM.Task.Status)
             {
                 case 0:
