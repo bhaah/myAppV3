@@ -338,20 +338,28 @@
                 if (node.left == null && node.right == null)
                 {
                     node = null;
+                    Console.WriteLine("delete tsatsa");
                 }
                 else if (node.left == null)
                 {
-                    node = node.right;
+
+
+                    if (node.right != null) { node.value = node.right.value; node.right = null; }
+                    else node = null;
+                    Console.WriteLine("delete tsatsa");
                 }
                 else if (node.right == null)
                 {
-                    node = node.left;
+                    node.value = node.left.value;
+                    node.left = null;
+                    Console.WriteLine("delete tsatsa");
                 }
                 else
                 {
                     Node successor = FindMin(node.right);
                     node.value = successor.value;
                     node.right = Delete(node.right, successor.value);
+                    Console.WriteLine("deleted success");
                 }
             }
 
