@@ -318,6 +318,7 @@
 
         private Node Delete(Node node, TaskCalendarModel value)
         {
+            Console.WriteLine("FROM DELETE IN AVL TO DELETE " + value.Task.Name);
             if (node == null)
             {
                 return null;
