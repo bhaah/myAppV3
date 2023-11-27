@@ -121,9 +121,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
             return _corners[corId].EditDeadline(taskID, status, dateTime);
         }
         public void removeDeadline() { }
-        public void setTimeTodo(int corId, int taskId, int status, DateTime dateTime)
+        public Task setTimeTodo(int corId, int taskId, int status, DateTime dateTime)
         {
-            _corners[corId].setTimeTodo(taskId, status, dateTime);
+            return _corners[corId].setTimeTodo(taskId, status, dateTime);
         }
         public void deleteTask(int corID, int taskId) 
         {

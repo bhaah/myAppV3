@@ -78,10 +78,11 @@ namespace WebApplication2.LogicLayer.BoardFolder
             if (!_tasks.ContainsKey(id)) { throw new ArgumentException("in this page there is no task id :" + id); }
             //_tasks[id].TaskFor = null;
         }
-        public void setTimeTodo(int id,DateTime dateTime) 
+        public Task setTimeTodo(int id,DateTime dateTime) 
         {
             if (!_tasks.ContainsKey(id)) { throw new ArgumentException("in this page there is no task id :" + id); }
             _tasks[id].TaskStart=dateTime;
+            return _tasks[id];
         }
 
         public void deleteAllTasks()

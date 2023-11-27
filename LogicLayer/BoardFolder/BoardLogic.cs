@@ -215,7 +215,20 @@ namespace WebApplication2.LogicLayer.BoardFolder
         public void editTaskStartTime(int corId,int taskId,int status,DateTime dateTime) 
         {
             checkBoard();
-            currBoard.setTimeTodo(corId, taskId, status, dateTime);
+            Task t =currBoard.setTimeTodo(corId, taskId, status, dateTime);
+            if(t.Status== 0)
+            {
+                moveTask(corId, taskId);
+            }
+        }
+        public void editTaskStartTimeFromCalendar(int boardId,int corId, int taskId, int status, DateTime dateTime)
+        {
+            Board board = _board[boardId];
+            Task t = board.setTimeTodo(corId, taskId, status, dateTime);
+            if (t.Status == 0)
+            {
+                moveTask(corId, taskId);
+            }
         }
 
 

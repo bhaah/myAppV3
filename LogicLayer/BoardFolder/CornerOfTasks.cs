@@ -130,9 +130,9 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
 
         }
-        public void setTimeTodo(int id, int status, DateTime dateTime)
+        public Task setTimeTodo(int id, int status, DateTime dateTime)
         {
-            _pages[status].setTimeTodo(id, dateTime);
+            return _pages[status].setTimeTodo(id, dateTime);
         }
 
         public List<Task> getTasks()

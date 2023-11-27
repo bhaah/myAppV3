@@ -454,6 +454,23 @@ namespace WebApplication2.Controllers
             }
             return Ok(JsonSerializer.Serialize(res));
         }
+        [HttpPost("UpdateStartTimeFromCalendar")]
+        public IActionResult PostEditTaskStartTimeCalendar([FromForm] string email, [FromForm] string password, [FromForm]int boardId, [FromForm] int corId, [FromForm] int taskId, [FromForm] DateTime StartTime, [FromForm] int status)
+        {
+            Response res;
+            try
+            {
+                BoardLogic bl = checkUser(email, password);
+                bl.editTaskStartTimeFromCalendar(boardId,corId, taskId, status, StartTime);
+                res = new Response();
+            }
+            catch (Exception ex)
+            {
+                res = new Response("error in editing the start time of task.\n" + ex.Message, null);
+
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
 
         [HttpPost("deleteTask")]
         public IActionResult deleteTaskPost([FromForm] string email, [FromForm] string password, [FromForm] int boardId, [FromForm] int corId, [FromForm] int taskId)
