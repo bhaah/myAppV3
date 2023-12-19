@@ -132,7 +132,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             foreach(Task t in _pages[1].Tasks.Values)
             {
                 Console.WriteLine(DateTime.Compare(t.TaskStart, DateTime.Now)+" "+t.TaskStart+" vs "+DateTime.Now+" +=++==+= tassk id : "+ t.Id);
-                if (DateTime.Compare(t.TaskStart, DateTime.Now)<=0 )
+                if (DateTime.Compare(t.TaskStart, DateTime.Now.AddHours(2))<=0 )
                 {
                     list.Add(t);
                 }

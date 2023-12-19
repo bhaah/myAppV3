@@ -333,13 +333,13 @@ namespace WebApplication2.Controllers
         //--------- TASK MANGMENT ------
 
         [HttpPost("refreshTasks")]
-        public IActionResult PostRefresh()
+        public IActionResult PostRefresh([FromForm] string email, [FromForm]string password)
         {
             Response res;
             Console.WriteLine("hi we are there");
             try
             {
-                var b = checkUser("bhaa123@bhaa.com", "12345678");
+                var b = checkUser(email, password);
                 b.checkTasksToMove();
                 res = new Response();
             }
