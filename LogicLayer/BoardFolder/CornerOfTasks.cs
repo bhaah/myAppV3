@@ -126,9 +126,17 @@ namespace WebApplication2.LogicLayer.BoardFolder
         {
             return _pages[status].EditDeadline(id, dateTime);
         }
-        public void removeDeadline()
+        public List<Task> GetTasksToMove() 
         {
-
+            List<Task> list = new List<Task>();
+            foreach(Task t in _pages[1].Tasks.Values)
+            {
+                if (DateTime.Compare(t.TaskStart, DateTime.Now)>=0)
+                {
+                    list.Add(t);
+                }
+            }
+            return list;
         }
         public Task setTimeTodo(int id, int status, DateTime dateTime)
         {

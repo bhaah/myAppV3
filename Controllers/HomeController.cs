@@ -332,6 +332,26 @@ namespace WebApplication2.Controllers
 
         //--------- TASK MANGMENT ------
 
+        [HttpPost("refreshTasks")]
+        public IActionResult PostRefresh()
+        {
+            Response res;
+            Console.WriteLine("hi we are there");
+            try
+            {
+                var b = checkUser("bhaa123@bhaa.com", "12345678");
+                b.checkTasksToMove();
+                res = new Response();
+            }
+            catch(Exception e)
+            {
+                res = new Response(e.Message);
+            }
+            return Ok(JsonSerializer.Serialize(res));
+        }
+
+
+
         [HttpPost("creatTask")]
         public IActionResult PostTask([FromForm] string email,[FromForm] string password,[FromForm] int corId, [FromForm] int taskId, [FromForm] string taskName, [FromForm] int id, [FromForm] string desc, [FromForm] DateTime dateTime)
         {

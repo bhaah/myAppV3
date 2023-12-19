@@ -130,6 +130,20 @@ namespace WebApplication2.LogicLayer.BoardFolder
             _corners[corID].deleteTask(taskId);
         }
 
+        public Dictionary<int,List<Task>> checkTasksToMove()
+        {
+            Dictionary<int,List<Task>> res = new Dictionary<int,List<Task>>();
+            foreach(CornerOfTasks c in _corners.Values)
+            {
+                List<Task> tasks = c.GetTasksToMove();
+                if (tasks.Count() > 0)
+                {
+                    res.Add(c.ID, tasks);
+                }
+            }
+            return res;
+        }
+
         //true - new tasks / false - in progress tasks
         public List<TaskCalendarModel> GetCalendarTasks()
         {

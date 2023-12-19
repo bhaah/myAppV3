@@ -232,6 +232,26 @@ namespace WebApplication2.LogicLayer.BoardFolder
         }
 
 
+
+        public void checkTasksToMove()
+        {
+            foreach(Board b in _board.Values)
+            {
+                Dictionary<int,List<Task>> _cornerTasksToMove = b.checkTasksToMove();
+                foreach(int corId in _cornerTasksToMove.Keys)
+                {
+                    foreach(Task t in _cornerTasksToMove[corId])
+                    {
+                        if (t.Status == 1)
+                        {
+                            moveTaskFromOut(b.ID, corId, t.Id);
+                        }
+                    }
+                }
+            }
+        }
+
+
         //notes
         public Note[] getAllNotes() 
         {
