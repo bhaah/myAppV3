@@ -240,6 +240,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
                 Dictionary<int,List<Task>> _cornerTasksToMove = b.checkTasksToMove();
                 foreach(int corId in _cornerTasksToMove.Keys)
                 {
+                    Console.WriteLine("we are in corner with id: " + corId + "tasks to move count : " + _cornerTasksToMove[corId].Count());
                     foreach(Task t in _cornerTasksToMove[corId])
                     {
                         if (t.Status == 1)

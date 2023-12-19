@@ -131,7 +131,8 @@ namespace WebApplication2.LogicLayer.BoardFolder
             List<Task> list = new List<Task>();
             foreach(Task t in _pages[1].Tasks.Values)
             {
-                if (DateTime.Compare(t.TaskStart, DateTime.Now)>=0)
+                Console.WriteLine(DateTime.Compare(t.TaskStart, DateTime.Now)+" "+t.TaskStart+" vs "+DateTime.Now+" +=++==+= tassk id : "+ t.Id);
+                if (DateTime.Compare(t.TaskStart, DateTime.Now)<=0 )
                 {
                     list.Add(t);
                 }
