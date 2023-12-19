@@ -227,7 +227,7 @@ namespace WebApplication2.LogicLayer.BoardFolder
             Task t = board.setTimeTodo(corId, taskId, status, dateTime);
             if (t.Status == 0)
             {
-                moveTask(corId, taskId);
+                moveTaskFromOut(boardId,corId, taskId);
             }
         }
 
